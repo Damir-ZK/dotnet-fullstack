@@ -75,7 +75,7 @@ try
 
     await app.RunAsync().ConfigureAwait(false);
 }
-catch (Exception ex)
+catch (Exception ex) 
 {
     Log.Fatal(ex, "Application terminated unexpectedly");
 }
