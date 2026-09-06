@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="../DirectoryService.Contracts/DirectoryService.Contracts.csproj" />
     <ProjectReference Include="../DirectoryService.Domain/DirectoryService.Domain.csproj" />
