@@ -23,7 +23,7 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
         try
         {
             var exists = await _dbContext.Departments
-                .AnyAsync(d => d.Name.ToLower() == name.ToLower(), cancellationToken);
+                .AnyAsync(d => string.Equals(d.Name, name, StringComparison.OrdinalIgnoreCase), cancellationToken);
             return Result.Success<bool, Error>(exists);
         }
         catch (Exception ex)

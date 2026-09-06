@@ -8,4 +8,4 @@ public sealed record CreateDepartmentCommand(
     string Name,
     string Slug,
     Guid? ParentId,
-    List<Guid>? LocationIds) : ICommand<DepartmentDto>;
+    IReadOnlyList<Guid>? LocationIds) : ICommand<DepartmentDto>;

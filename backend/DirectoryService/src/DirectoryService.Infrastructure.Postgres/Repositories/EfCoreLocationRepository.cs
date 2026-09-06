@@ -23,7 +23,7 @@ public sealed class EfCoreLocationRepository : ILocationRepository
         try
         {
             var exists = await _dbContext.Locations
-                .AnyAsync(l => l.Name.ToLower() == name.ToLower(), cancellationToken);
+                .AnyAsync(l => string.Equals(l.Name, name, StringComparison.OrdinalIgnoreCase), cancellationToken);
             return Result.Success<bool, Error>(exists);
         }
         catch (Exception ex)

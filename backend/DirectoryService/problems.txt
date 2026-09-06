@@ -1,0 +1,1463 @@
+[{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Application/Departments/CreateDepartment/CreateDepartmentCommand.cs",
+	"owner": "csharp-build",
+	"code": "MA0016",
+	"severity": 4,
+	"message": "Prefer using collection abstraction instead of implementation (https://github.com/meziantou/Meziantou.Analyzer/blob/main/docs/Rules/MA0016.md) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Application\\DirectoryService.Application.csproj]",
+	"startLineNumber": 11,
+	"startColumn": 5,
+	"endLineNumber": 11,
+	"endColumn": 5,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Application/Departments/CreateDepartment/CreateDepartmentCommand.cs",
+	"owner": "csharp-build",
+	"code": "MA0016",
+	"severity": 4,
+	"message": "Prefer using collection abstraction instead of implementation (https://github.com/meziantou/Meziantou.Analyzer/blob/main/docs/Rules/MA0016.md) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Application\\DirectoryService.Application.csproj]",
+	"startLineNumber": 11,
+	"startColumn": 17,
+	"endLineNumber": 11,
+	"endColumn": 17,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Migrations/20260725120434_AddDepartmentLocationUniqueness.cs",
+	"owner": "csharp-build",
+	"code": "CA1861",
+	"severity": 4,
+	"message": "Prefer 'static readonly' fields over constant array arguments if the called method is called repeatedly and is not mutating the passed array (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1861) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 20,
+	"startColumn": 26,
+	"endLineNumber": 20,
+	"endColumn": 26,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'NameExistsAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 38,
+	"startColumn": 9,
+	"endLineNumber": 38,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 40,
+	"startColumn": 13,
+	"endLineNumber": 40,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'AddAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 96,
+	"startColumn": 9,
+	"endLineNumber": 96,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 99,
+	"startColumn": 13,
+	"endLineNumber": 99,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'UpdateAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 131,
+	"startColumn": 9,
+	"endLineNumber": 131,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 133,
+	"startColumn": 13,
+	"endLineNumber": 133,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'DeleteAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 160,
+	"startColumn": 9,
+	"endLineNumber": 160,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 162,
+	"startColumn": 13,
+	"endLineNumber": 162,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'GetAllAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 181,
+	"startColumn": 9,
+	"endLineNumber": 181,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 183,
+	"startColumn": 13,
+	"endLineNumber": 183,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'GetByIdAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 208,
+	"startColumn": 9,
+	"endLineNumber": 208,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 210,
+	"startColumn": 13,
+	"endLineNumber": 210,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'UpdateDepartmentNameAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 238,
+	"startColumn": 9,
+	"endLineNumber": 238,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 240,
+	"startColumn": 13,
+	"endLineNumber": 240,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'LocationLinkExistsAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 261,
+	"startColumn": 9,
+	"endLineNumber": 261,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 263,
+	"startColumn": 13,
+	"endLineNumber": 263,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'AddLocationLinkAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 284,
+	"startColumn": 9,
+	"endLineNumber": 284,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 286,
+	"startColumn": 13,
+	"endLineNumber": 286,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'RemoveLocationLinkAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 310,
+	"startColumn": 9,
+	"endLineNumber": 310,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 312,
+	"startColumn": 13,
+	"endLineNumber": 312,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperLocationRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'NameExistsAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 38,
+	"startColumn": 9,
+	"endLineNumber": 38,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperLocationRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 40,
+	"startColumn": 13,
+	"endLineNumber": 40,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperLocationRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'AddAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 65,
+	"startColumn": 9,
+	"endLineNumber": 65,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperLocationRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 67,
+	"startColumn": 13,
+	"endLineNumber": 67,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperLocationRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'GetAllAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 85,
+	"startColumn": 9,
+	"endLineNumber": 85,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperLocationRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 87,
+	"startColumn": 13,
+	"endLineNumber": 87,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperLocationRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'GetByIdAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 112,
+	"startColumn": 9,
+	"endLineNumber": 112,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperLocationRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 114,
+	"startColumn": 13,
+	"endLineNumber": 114,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperLocationRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'UpdateAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 142,
+	"startColumn": 9,
+	"endLineNumber": 142,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperLocationRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 144,
+	"startColumn": 13,
+	"endLineNumber": 144,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperLocationRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'DeleteAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 171,
+	"startColumn": 9,
+	"endLineNumber": 171,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperLocationRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 173,
+	"startColumn": 13,
+	"endLineNumber": 173,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperLocationRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'UpdateLocationNameAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 202,
+	"startColumn": 9,
+	"endLineNumber": 202,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/DapperLocationRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 204,
+	"startColumn": 13,
+	"endLineNumber": 204,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1862",
+	"severity": 4,
+	"message": "Prefer using 'string.Equals(string, StringComparison)' to perform a case-insensitive comparison, but keep in mind that this might cause subtle changes in behavior, so make sure to conduct thorough testing after applying the suggestion, or if culturally sensitive comparison is not required, consider using 'StringComparison.OrdinalIgnoreCase' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1862) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 26,
+	"startColumn": 32,
+	"endLineNumber": 26,
+	"endColumn": 32,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1304",
+	"severity": 4,
+	"message": "The behavior of 'string.ToLower()' could vary based on the current user's locale settings. Replace this call in 'EfCoreDepartmentRepository.NameExistsAsync(string, CancellationToken)' with a call to 'string.ToLower(CultureInfo)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1304) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 26,
+	"startColumn": 32,
+	"endLineNumber": 26,
+	"endColumn": 32,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "MA0011",
+	"severity": 4,
+	"message": "Use an overload of 'ToLower' that has a 'System.Globalization.CultureInfo' parameter (https://github.com/meziantou/Meziantou.Analyzer/blob/main/docs/Rules/MA0011.md) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 26,
+	"startColumn": 32,
+	"endLineNumber": 26,
+	"endColumn": 32,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "RCS1155",
+	"severity": 4,
+	"message": "Use StringComparison when comparing strings (https://josefpihrt.github.io/docs/roslynator/analyzers/RCS1155) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 26,
+	"startColumn": 32,
+	"endLineNumber": 26,
+	"endColumn": 32,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1311",
+	"severity": 4,
+	"message": "Specify a culture or use an invariant version to avoid implicit dependency on current culture (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1311) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 26,
+	"startColumn": 39,
+	"endLineNumber": 26,
+	"endColumn": 39,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1304",
+	"severity": 4,
+	"message": "The behavior of 'string.ToLower()' could vary based on the current user's locale settings. Replace this call in 'EfCoreDepartmentRepository.NameExistsAsync(string, CancellationToken)' with a call to 'string.ToLower(CultureInfo)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1304) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 26,
+	"startColumn": 52,
+	"endLineNumber": 26,
+	"endColumn": 52,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "MA0011",
+	"severity": 4,
+	"message": "Use an overload of 'ToLower' that has a 'System.Globalization.CultureInfo' parameter (https://github.com/meziantou/Meziantou.Analyzer/blob/main/docs/Rules/MA0011.md) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 26,
+	"startColumn": 52,
+	"endLineNumber": 26,
+	"endColumn": 52,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1311",
+	"severity": 4,
+	"message": "Specify a culture or use an invariant version to avoid implicit dependency on current culture (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1311) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 26,
+	"startColumn": 57,
+	"endLineNumber": 26,
+	"endColumn": 57,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'NameExistsAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 29,
+	"startColumn": 9,
+	"endLineNumber": 29,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 31,
+	"startColumn": 13,
+	"endLineNumber": 31,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'AddAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 65,
+	"startColumn": 9,
+	"endLineNumber": 65,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 67,
+	"startColumn": 13,
+	"endLineNumber": 67,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'UpdateAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 90,
+	"startColumn": 9,
+	"endLineNumber": 90,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 92,
+	"startColumn": 13,
+	"endLineNumber": 92,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'DeleteAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 112,
+	"startColumn": 9,
+	"endLineNumber": 112,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 114,
+	"startColumn": 13,
+	"endLineNumber": 114,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'GetAllAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 129,
+	"startColumn": 9,
+	"endLineNumber": 129,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 131,
+	"startColumn": 13,
+	"endLineNumber": 131,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'GetByIdAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 151,
+	"startColumn": 9,
+	"endLineNumber": 151,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 153,
+	"startColumn": 13,
+	"endLineNumber": 153,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'UpdateDepartmentNameAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 175,
+	"startColumn": 9,
+	"endLineNumber": 175,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 177,
+	"startColumn": 13,
+	"endLineNumber": 177,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'LocationLinkExistsAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 190,
+	"startColumn": 9,
+	"endLineNumber": 190,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 192,
+	"startColumn": 13,
+	"endLineNumber": 192,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'AddLocationLinkAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 211,
+	"startColumn": 9,
+	"endLineNumber": 211,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 213,
+	"startColumn": 13,
+	"endLineNumber": 213,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1031",
+	"severity": 4,
+	"message": "Modify 'RemoveLocationLinkAsync' to catch a more specific allowed exception type, or rethrow the exception (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1031) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 233,
+	"startColumn": 9,
+	"endLineNumber": 233,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreDepartmentRepository.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Infrastructure.Postgres\\DirectoryService.Infrastructure.Postgres.csproj]",
+	"startLineNumber": 235,
+	"startColumn": 13,
+	"endLineNumber": 235,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1304",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1304",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "The behavior of 'string.ToLower()' could vary based on the current user's locale settings. Replace this call in 'EfCoreLocationRepository.NameExistsAsync(string, CancellationToken)' with a call to 'string.ToLower(CultureInfo)'.",
+	"startLineNumber": 26,
+	"startColumn": 32,
+	"endLineNumber": 26,
+	"endColumn": 48,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "MA0011",
+		"target": {
+			"$mid": 1,
+			"path": "/meziantou/Meziantou.Analyzer/blob/main/docs/Rules/MA0011.md",
+			"scheme": "https",
+			"authority": "github.com"
+		}
+	},
+	"severity": 4,
+	"message": "Use an overload of 'ToLower' that has a 'System.Globalization.CultureInfo' parameter",
+	"startLineNumber": 26,
+	"startColumn": 32,
+	"endLineNumber": 26,
+	"endColumn": 48,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "Use an overload of 'ToLower' that has a 'System.Globalization.CultureInfo' parameter",
+	"source": "ReSharper",
+	"startLineNumber": 26,
+	"startColumn": 32,
+	"endLineNumber": 26,
+	"endColumn": 48,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "The behavior of 'string.ToLower()' could vary based on the current user's locale settings. Replace this call in 'EfCoreLocationRepository.NameExistsAsync(string, CancellationToken)' with a call to 'string.ToLower(CultureInfo)'.",
+	"source": "ReSharper",
+	"startLineNumber": 26,
+	"startColumn": 32,
+	"endLineNumber": 26,
+	"endColumn": 48,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1862",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1862",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "Prefer using 'string.Equals(string, StringComparison)' to perform a case-insensitive comparison, but keep in mind that this might cause subtle changes in behavior, so make sure to conduct thorough testing after applying the suggestion, or if culturally sensitive comparison is not required, consider using 'StringComparison.OrdinalIgnoreCase'",
+	"startLineNumber": 26,
+	"startColumn": 32,
+	"endLineNumber": 26,
+	"endColumn": 66,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "RCS1155",
+		"target": {
+			"$mid": 1,
+			"path": "/docs/roslynator/analyzers/RCS1155",
+			"scheme": "https",
+			"authority": "josefpihrt.github.io"
+		}
+	},
+	"severity": 4,
+	"message": "Use StringComparison when comparing strings",
+	"startLineNumber": 26,
+	"startColumn": 32,
+	"endLineNumber": 26,
+	"endColumn": 66,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "Prefer using 'string.Equals(string, StringComparison)' to perform a case-insensitive comparison, but keep in mind that this might cause subtle changes in behavior, so make sure to conduct thorough testing after applying the suggestion, or if culturally sensitive comparison is not required, consider using 'StringComparison.OrdinalIgnoreCase'",
+	"source": "ReSharper",
+	"startLineNumber": 26,
+	"startColumn": 32,
+	"endLineNumber": 26,
+	"endColumn": 66,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "Use StringComparison when comparing strings",
+	"source": "ReSharper",
+	"startLineNumber": 26,
+	"startColumn": 32,
+	"endLineNumber": 26,
+	"endColumn": 66,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1311",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1311",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "Specify a culture or use an invariant version to avoid implicit dependency on current culture",
+	"startLineNumber": 26,
+	"startColumn": 39,
+	"endLineNumber": 26,
+	"endColumn": 46,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "Specify a culture or use an invariant version to avoid implicit dependency on current culture",
+	"source": "ReSharper",
+	"startLineNumber": 26,
+	"startColumn": 39,
+	"endLineNumber": 26,
+	"endColumn": 46,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1304",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1304",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "The behavior of 'string.ToLower()' could vary based on the current user's locale settings. Replace this call in 'EfCoreLocationRepository.NameExistsAsync(string, CancellationToken)' with a call to 'string.ToLower(CultureInfo)'.",
+	"startLineNumber": 26,
+	"startColumn": 52,
+	"endLineNumber": 26,
+	"endColumn": 66,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "MA0011",
+		"target": {
+			"$mid": 1,
+			"path": "/meziantou/Meziantou.Analyzer/blob/main/docs/Rules/MA0011.md",
+			"scheme": "https",
+			"authority": "github.com"
+		}
+	},
+	"severity": 4,
+	"message": "Use an overload of 'ToLower' that has a 'System.Globalization.CultureInfo' parameter",
+	"startLineNumber": 26,
+	"startColumn": 52,
+	"endLineNumber": 26,
+	"endColumn": 66,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "Use an overload of 'ToLower' that has a 'System.Globalization.CultureInfo' parameter",
+	"source": "ReSharper",
+	"startLineNumber": 26,
+	"startColumn": 52,
+	"endLineNumber": 26,
+	"endColumn": 66,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "The behavior of 'string.ToLower()' could vary based on the current user's locale settings. Replace this call in 'EfCoreLocationRepository.NameExistsAsync(string, CancellationToken)' with a call to 'string.ToLower(CultureInfo)'.",
+	"source": "ReSharper",
+	"startLineNumber": 26,
+	"startColumn": 52,
+	"endLineNumber": 26,
+	"endColumn": 66,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1311",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1311",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "Specify a culture or use an invariant version to avoid implicit dependency on current culture",
+	"startLineNumber": 26,
+	"startColumn": 57,
+	"endLineNumber": 26,
+	"endColumn": 64,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "Specify a culture or use an invariant version to avoid implicit dependency on current culture",
+	"source": "ReSharper",
+	"startLineNumber": 26,
+	"startColumn": 57,
+	"endLineNumber": 26,
+	"endColumn": 64,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1031",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1031",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "Modify 'NameExistsAsync' to catch a more specific allowed exception type, or rethrow the exception",
+	"startLineNumber": 29,
+	"startColumn": 9,
+	"endLineNumber": 29,
+	"endColumn": 14,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "Modify 'NameExistsAsync' to catch a more specific allowed exception type, or rethrow the exception",
+	"source": "ReSharper",
+	"startLineNumber": 29,
+	"startColumn": 9,
+	"endLineNumber": 29,
+	"endColumn": 14,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1848",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1848",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])'",
+	"startLineNumber": 31,
+	"startColumn": 13,
+	"endLineNumber": 31,
+	"endColumn": 90,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])'",
+	"source": "ReSharper",
+	"startLineNumber": 31,
+	"startColumn": 13,
+	"endLineNumber": 31,
+	"endColumn": 90,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1031",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1031",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "Modify 'AddAsync' to catch a more specific allowed exception type, or rethrow the exception",
+	"startLineNumber": 44,
+	"startColumn": 9,
+	"endLineNumber": 44,
+	"endColumn": 14,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "Modify 'AddAsync' to catch a more specific allowed exception type, or rethrow the exception",
+	"source": "ReSharper",
+	"startLineNumber": 44,
+	"startColumn": 9,
+	"endLineNumber": 44,
+	"endColumn": 14,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1848",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1848",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])'",
+	"startLineNumber": 46,
+	"startColumn": 13,
+	"endLineNumber": 46,
+	"endColumn": 118,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])'",
+	"source": "ReSharper",
+	"startLineNumber": 46,
+	"startColumn": 13,
+	"endLineNumber": 46,
+	"endColumn": 118,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1031",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1031",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "Modify 'GetAllAsync' to catch a more specific allowed exception type, or rethrow the exception",
+	"startLineNumber": 60,
+	"startColumn": 9,
+	"endLineNumber": 60,
+	"endColumn": 14,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "Modify 'GetAllAsync' to catch a more specific allowed exception type, or rethrow the exception",
+	"source": "ReSharper",
+	"startLineNumber": 60,
+	"startColumn": 9,
+	"endLineNumber": 60,
+	"endColumn": 14,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1848",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1848",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])'",
+	"startLineNumber": 62,
+	"startColumn": 13,
+	"endLineNumber": 62,
+	"endColumn": 67,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])'",
+	"source": "ReSharper",
+	"startLineNumber": 62,
+	"startColumn": 13,
+	"endLineNumber": 62,
+	"endColumn": 67,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1031",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1031",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "Modify 'GetByIdAsync' to catch a more specific allowed exception type, or rethrow the exception",
+	"startLineNumber": 82,
+	"startColumn": 9,
+	"endLineNumber": 82,
+	"endColumn": 14,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "Modify 'GetByIdAsync' to catch a more specific allowed exception type, or rethrow the exception",
+	"source": "ReSharper",
+	"startLineNumber": 82,
+	"startColumn": 9,
+	"endLineNumber": 82,
+	"endColumn": 14,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1848",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1848",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])'",
+	"startLineNumber": 84,
+	"startColumn": 13,
+	"endLineNumber": 84,
+	"endColumn": 84,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])'",
+	"source": "ReSharper",
+	"startLineNumber": 84,
+	"startColumn": 13,
+	"endLineNumber": 84,
+	"endColumn": 84,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1031",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1031",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "Modify 'UpdateAsync' to catch a more specific allowed exception type, or rethrow the exception",
+	"startLineNumber": 107,
+	"startColumn": 9,
+	"endLineNumber": 107,
+	"endColumn": 14,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "Modify 'UpdateAsync' to catch a more specific allowed exception type, or rethrow the exception",
+	"source": "ReSharper",
+	"startLineNumber": 107,
+	"startColumn": 9,
+	"endLineNumber": 107,
+	"endColumn": 14,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1848",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1848",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])'",
+	"startLineNumber": 109,
+	"startColumn": 13,
+	"endLineNumber": 109,
+	"endColumn": 88,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])'",
+	"source": "ReSharper",
+	"startLineNumber": 109,
+	"startColumn": 13,
+	"endLineNumber": 109,
+	"endColumn": 88,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1031",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1031",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "Modify 'DeleteAsync' to catch a more specific allowed exception type, or rethrow the exception",
+	"startLineNumber": 129,
+	"startColumn": 9,
+	"endLineNumber": 129,
+	"endColumn": 14,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "Modify 'DeleteAsync' to catch a more specific allowed exception type, or rethrow the exception",
+	"source": "ReSharper",
+	"startLineNumber": 129,
+	"startColumn": 9,
+	"endLineNumber": 129,
+	"endColumn": 14,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1848",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1848",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])'",
+	"startLineNumber": 131,
+	"startColumn": 13,
+	"endLineNumber": 131,
+	"endColumn": 79,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])'",
+	"source": "ReSharper",
+	"startLineNumber": 131,
+	"startColumn": 13,
+	"endLineNumber": 131,
+	"endColumn": 79,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1031",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1031",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "Modify 'UpdateLocationNameAsync' to catch a more specific allowed exception type, or rethrow the exception",
+	"startLineNumber": 153,
+	"startColumn": 9,
+	"endLineNumber": 153,
+	"endColumn": 14,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "Modify 'UpdateLocationNameAsync' to catch a more specific allowed exception type, or rethrow the exception",
+	"source": "ReSharper",
+	"startLineNumber": 153,
+	"startColumn": 9,
+	"endLineNumber": 153,
+	"endColumn": 14,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1848",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1848",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])'",
+	"startLineNumber": 155,
+	"startColumn": 13,
+	"endLineNumber": 155,
+	"endColumn": 88,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Infrastructure.Postgres/Repositories/EfCoreLocationRepository.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])'",
+	"source": "ReSharper",
+	"startLineNumber": 155,
+	"startColumn": 13,
+	"endLineNumber": 155,
+	"endColumn": 88,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Presentation/GlobalExceptionHandler.cs",
+	"owner": "csharp-build",
+	"code": "CA1848",
+	"severity": 4,
+	"message": "For improved performance, use the LoggerMessage delegates instead of calling 'LoggerExtensions.LogError(ILogger, Exception?, string?, params object?[])' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1848) [e:\\Programming\\Visual Studio\\Projects\\dotnet-fullstack\\backend\\DirectoryService\\src\\DirectoryService.Presentation\\DirectoryService.Presentation.csproj]",
+	"startLineNumber": 23,
+	"startColumn": 9,
+	"endLineNumber": 23,
+	"endColumn": 9,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Presentation/Program.cs",
+	"owner": "DocumentAnalyzerSemantic",
+	"code": {
+		"value": "CA1031",
+		"target": {
+			"$mid": 1,
+			"path": "/dotnet/fundamentals/code-analysis/quality-rules/ca1031",
+			"scheme": "https",
+			"authority": "learn.microsoft.com"
+		}
+	},
+	"severity": 4,
+	"message": "Modify '<Main>$' to catch a more specific allowed exception type, or rethrow the exception",
+	"startLineNumber": 78,
+	"startColumn": 1,
+	"endLineNumber": 78,
+	"endColumn": 6,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/e:/Programming/Visual Studio/Projects/dotnet-fullstack/backend/DirectoryService/src/DirectoryService.Presentation/Program.cs",
+	"owner": "resharper",
+	"severity": 4,
+	"message": "Modify '<Main>$' to catch a more specific allowed exception type, or rethrow the exception",
+	"source": "ReSharper",
+	"startLineNumber": 78,
+	"startColumn": 1,
+	"endLineNumber": 78,
+	"endColumn": 6,
+	"modelVersionId": 1,
+	"origin": "extHost1"
+}]
