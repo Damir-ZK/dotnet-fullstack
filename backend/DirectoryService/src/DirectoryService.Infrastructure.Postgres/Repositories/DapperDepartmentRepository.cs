@@ -38,6 +38,10 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
                 new CommandDefinition(sql, new { Name = name, ExcludeId = excludeId }, cancellationToken: cancellationToken));
             return Result.Success<bool, Error>(exists);
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to check if department name {Name} exists.", name);
@@ -108,6 +112,11 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
             transaction.Commit();
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            transaction.Rollback();
+            throw;
+        }
         catch (Exception ex)
         {
             transaction.Rollback();
@@ -143,6 +152,10 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to update department {DepartmentId}", department.Id);
@@ -172,6 +185,10 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to delete department {DepartmentId}", id);
@@ -192,6 +209,10 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
                 new CommandDefinition(sql, cancellationToken: cancellationToken));
 
             return Result.Success<IReadOnlyList<Department>, Error>(departments.AsList());
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -219,6 +240,10 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
             }
 
             return Result.Success<Department, Error>(department);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -250,6 +275,10 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to update department name for {DepartmentId}", id);
@@ -273,6 +302,10 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
                 new CommandDefinition(sql, new { DepartmentId = departmentId, LocationId = locationId }, cancellationToken: cancellationToken));
             return Result.Success<bool, Error>(exists);
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to check if location link exists for Department {DepartmentId} and Location {LocationId}", departmentId, locationId);
@@ -295,6 +328,10 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
                     new { Id = Guid.NewGuid(), DepartmentId = departmentId, LocationId = locationId },
                     cancellationToken: cancellationToken));
             return UnitResult.Success<Error>();
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -322,6 +359,10 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to remove location link for Department {DepartmentId} and Location {LocationId}", departmentId, locationId);
@@ -343,6 +384,10 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
                 new CommandDefinition(sql, new { DepartmentId = departmentId }, cancellationToken: cancellationToken));
 
             return Result.Success<IReadOnlyList<Guid>, Error>(locationIds.AsList());
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {

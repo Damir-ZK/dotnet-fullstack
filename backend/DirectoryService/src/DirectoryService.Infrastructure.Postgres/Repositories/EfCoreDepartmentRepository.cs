@@ -36,6 +36,10 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
             var exists = await query.AnyAsync(cancellationToken);
             return Result.Success<bool, Error>(exists);
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to check if department name {Name} exists.", name);
@@ -72,6 +76,10 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
             await transaction.CommitAsync(cancellationToken);
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to save department {DepartmentId} with name {Name}", department.Id, department.Name);
@@ -97,6 +105,10 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to update department {DepartmentId}", department.Id);
@@ -119,6 +131,10 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to delete department {DepartmentId}", id);
@@ -135,6 +151,10 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
                 .ToListAsync(cancellationToken);
 
             return Result.Success<IReadOnlyList<Department>, Error>(departments);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -157,6 +177,10 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
             }
 
             return Result.Success<Department, Error>(department);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -182,6 +206,10 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to update department name for {DepartmentId}", id);
@@ -196,6 +224,10 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
             var exists = await _dbContext.DepartmentLocations
                 .AnyAsync(link => link.DepartmentId == departmentId && link.LocationId == locationId, cancellationToken);
             return Result.Success<bool, Error>(exists);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -217,6 +249,10 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
             await _dbContext.DepartmentLocations.AddAsync(createResult.Value, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);
             return UnitResult.Success<Error>();
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -240,6 +276,10 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to remove location link for Department {DepartmentId} and Location {LocationId}", departmentId, locationId);
@@ -257,6 +297,10 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
                 .ToListAsync(cancellationToken);
 
             return Result.Success<IReadOnlyList<Guid>, Error>(locationIds);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {

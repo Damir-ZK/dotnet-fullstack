@@ -38,6 +38,10 @@ public class DapperLocationRepository : ILocationRepository
                 new CommandDefinition(sql, new { Name = name, ExcludeId = excludeId }, cancellationToken: cancellationToken));
             return Result.Success<bool, Error>(exists);
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to check if location name {Name} exists.", name);
@@ -65,6 +69,10 @@ public class DapperLocationRepository : ILocationRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to save location {LocationId} with name {Name}", location.Id, location.Name);
@@ -84,6 +92,10 @@ public class DapperLocationRepository : ILocationRepository
             var locations = await _connection.QueryAsync<Location>(
                 new CommandDefinition(sql, cancellationToken: cancellationToken));
             return Result.Success<IReadOnlyList<Location>, Error>(locations.AsList());
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -111,6 +123,10 @@ public class DapperLocationRepository : ILocationRepository
             }
 
             return Result.Success<Location, Error>(location);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -142,6 +158,10 @@ public class DapperLocationRepository : ILocationRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to update location {LocationId}", location.Id);
@@ -170,6 +190,10 @@ public class DapperLocationRepository : ILocationRepository
             }
 
             return UnitResult.Success<Error>();
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -201,6 +225,10 @@ public class DapperLocationRepository : ILocationRepository
             }
 
             return UnitResult.Success<Error>();
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
