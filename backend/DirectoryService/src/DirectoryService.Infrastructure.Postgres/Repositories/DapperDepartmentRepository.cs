@@ -57,6 +57,18 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
         VALUES (@Id, @DepartmentId, @LocationId, @IsPrimaryLocation)
         """;
 
+        if (_connection.State != ConnectionState.Open)
+        {
+            if (_connection is System.Data.Common.DbConnection dbConn)
+            {
+                await dbConn.OpenAsync(cancellationToken);
+            }
+            else
+            {
+                _connection.Open();
+            }
+        }
+
         var transaction = _connection.BeginTransaction();
 
         try
