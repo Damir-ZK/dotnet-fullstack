@@ -591,6 +591,9 @@ public sealed class LoggingTests
         var msOverride = serilogSection["MinimumLevel:Override:Microsoft"];
         Assert.Equal("Warning", msOverride);
 
+        var lifetimeOverride = serilogSection["MinimumLevel:Override:Microsoft.Hosting.Lifetime"];
+        Assert.Equal("Information", lifetimeOverride);
+
         var sinks = serilogSection.GetSection("WriteTo").GetChildren().Select(c => c["Name"]).ToList();
         Assert.Contains("Console", sinks);
         Assert.Contains("Seq", sinks);
