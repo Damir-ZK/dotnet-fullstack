@@ -78,7 +78,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(Result.Failure<bool, Error>(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(Result.Failure<bool, Error>(Errors.General.Database("Database failure")));
             }
 
             return Task.FromResult(Result.Success<bool, Error>(Locations.Any(l => (!excludeId.HasValue || l.Id != excludeId.Value) && string.Equals(l.Name, name, StringComparison.OrdinalIgnoreCase))));
@@ -88,7 +88,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             Locations.Add(location);
@@ -102,7 +102,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(Result.Failure<Location, Error>(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(Result.Failure<Location, Error>(Errors.General.Database("Database failure")));
             }
 
             var loc = Locations.FirstOrDefault(l => l.Id == id);
@@ -115,7 +115,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             return Task.FromResult(UnitResult.Success<Error>());
@@ -125,7 +125,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             var removed = Locations.RemoveAll(l => l.Id == id);
@@ -138,7 +138,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             var loc = Locations.FirstOrDefault(l => l.Id == id);
@@ -164,7 +164,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(Result.Failure<bool, Error>(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(Result.Failure<bool, Error>(Errors.General.Database("Database failure")));
             }
 
             return Task.FromResult(Result.Success<bool, Error>(Departments.Any(d => (!excludeId.HasValue || d.Id != excludeId.Value) && string.Equals(d.Name, name, StringComparison.OrdinalIgnoreCase))));
@@ -174,7 +174,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             Departments.Add(department);
@@ -193,7 +193,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(Result.Failure<Department, Error>(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(Result.Failure<Department, Error>(Errors.General.Database("Database failure")));
             }
 
             var dept = Departments.FirstOrDefault(d => d.Id == id);
@@ -206,7 +206,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             return Task.FromResult(UnitResult.Success<Error>());
@@ -216,7 +216,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             var removed = Departments.RemoveAll(d => d.Id == id);
@@ -229,7 +229,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             var dept = Departments.FirstOrDefault(d => d.Id == id);
@@ -245,7 +245,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(Result.Failure<bool, Error>(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(Result.Failure<bool, Error>(Errors.General.Database("Database failure")));
             }
 
             return Task.FromResult(Result.Success<bool, Error>(Links.Contains((departmentId, locationId))));
@@ -255,7 +255,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             Links.Add((departmentId, locationId));
@@ -266,7 +266,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             var removed = Links.Remove((departmentId, locationId));
@@ -279,7 +279,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(Result.Failure<IReadOnlyList<Guid>, Error>(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(Result.Failure<IReadOnlyList<Guid>, Error>(Errors.General.Database("Database failure")));
             }
 
             IReadOnlyList<Guid> locIds = Links.Where(l => l.Item1 == departmentId).Select(l => l.Item2).ToList();
