@@ -23,7 +23,7 @@
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
 
     <!-- Глобальные отключения неактуальных для проекта предупреждений анализаторов -->
-    <NoWarn>$(NoWarn);CA1848;CA1031;CA1861</NoWarn>
+    <NoWarn>$(NoWarn);CA1848;CA1873;CA1031;CA1861</NoWarn>
   </PropertyGroup>
 
   

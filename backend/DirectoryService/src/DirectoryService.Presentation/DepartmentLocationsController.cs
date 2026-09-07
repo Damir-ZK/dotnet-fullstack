@@ -8,6 +8,7 @@ namespace DirectoryService.Presentation;
 [ApiController]
 [Route("departments/{departmentId:guid}/locations")]
 [ProducesResponseType(typeof(Envelope), StatusCodes.Status500InternalServerError)]
+#pragma warning disable S6960 // Controllers should not have multiple responsibilities
 public sealed class DepartmentLocationsController : ControllerBase
 {
     private readonly ICommandHandler<LinkDepartmentLocationCommand> _linkHandler;

@@ -19,6 +19,8 @@ public sealed class LocationsController : ControllerBase
     private readonly ICommandHandler<UpdateLocationCommand> _updateLocationHandler;
     private readonly ICommandHandler<DeleteLocationCommand> _deleteLocationHandler;
     private readonly ICommandHandler<UpdateLocationNameCommand, Guid> _updateLocationNameHandler;
+    private readonly ILogger<LocationsController> _logger;
+    private readonly Serilog.IDiagnosticContext? _diagnosticContext;
 
     public LocationsController(
         ICommandHandler<CreateLocationCommand, Guid> createLocationHandler,
@@ -26,7 +28,9 @@ public sealed class LocationsController : ControllerBase
         IQueryHandler<GetLocationByIdQuery, LocationDto> getLocationByIdHandler,
         ICommandHandler<UpdateLocationCommand> updateLocationHandler,
         ICommandHandler<DeleteLocationCommand> deleteLocationHandler,
-        ICommandHandler<UpdateLocationNameCommand, Guid> updateLocationNameHandler)
+        ICommandHandler<UpdateLocationNameCommand, Guid> updateLocationNameHandler,
+        ILogger<LocationsController>? logger = null,
+        Serilog.IDiagnosticContext? diagnosticContext = null)
     {
         _createLocationHandler = createLocationHandler;
         _getLocationsHandler = getLocationsHandler;
@@ -34,6 +38,8 @@ public sealed class LocationsController : ControllerBase
         _updateLocationHandler = updateLocationHandler;
         _deleteLocationHandler = deleteLocationHandler;
         _updateLocationNameHandler = updateLocationNameHandler;
+        _logger = logger ?? Microsoft.Extensions.Logging.Abstractions.NullLogger<LocationsController>.Instance;
+        _diagnosticContext = diagnosticContext;
     }
 
     [HttpPost]
@@ -46,6 +52,10 @@ public sealed class LocationsController : ControllerBase
     {
         var command = new CreateLocationCommand(locationDto.Name, locationDto.Address);
         var result = await _createLocationHandler.Handle(command, cancellationToken);
+        if (result.IsSuccess)
+        {
+            _diagnosticContext?.Set("LocationId", result.Value);
+        }
         return result.ToCreatedEnvelopeResult();
     }
 
@@ -109,6 +119,7 @@ public sealed class LocationsController : ControllerBase
     {
         if (request.Id != id)
         {
+            _logger.LogWarning("Route ID {RouteLocationId} does not match request ID {RequestLocationId} for location name update", id, request.Id);
             ErrorList error = Errors.General.ValueIsInvalid(nameof(request.Id), "The route id and request id do not match.");
             return error.ToEnvelopeResult();
         }

@@ -19,6 +19,8 @@ public sealed class DepartmentsController : ControllerBase
     private readonly ICommandHandler<UpdateDepartmentCommand> _updateDepartmentHandler;
     private readonly ICommandHandler<DeleteDepartmentCommand> _deleteDepartmentHandler;
     private readonly ICommandHandler<UpdateDepartmentNameCommand, Guid> _updateDepartmentNameHandler;
+    private readonly ILogger<DepartmentsController> _logger;
+    private readonly Serilog.IDiagnosticContext? _diagnosticContext;
 
     public DepartmentsController(
         ICommandHandler<CreateDepartmentCommand, DepartmentDto> createDepartmentHandler,
@@ -26,7 +28,9 @@ public sealed class DepartmentsController : ControllerBase
         IQueryHandler<GetDepartmentByIdQuery, DepartmentDto> getDepartmentByIdHandler,
         ICommandHandler<UpdateDepartmentCommand> updateDepartmentHandler,
         ICommandHandler<DeleteDepartmentCommand> deleteDepartmentHandler,
-        ICommandHandler<UpdateDepartmentNameCommand, Guid> updateDepartmentNameHandler)
+        ICommandHandler<UpdateDepartmentNameCommand, Guid> updateDepartmentNameHandler,
+        ILogger<DepartmentsController>? logger = null,
+        Serilog.IDiagnosticContext? diagnosticContext = null)
     {
         _createDepartmentHandler = createDepartmentHandler;
         _getDepartmentsHandler = getDepartmentsHandler;
@@ -34,6 +38,8 @@ public sealed class DepartmentsController : ControllerBase
         _updateDepartmentHandler = updateDepartmentHandler;
         _deleteDepartmentHandler = deleteDepartmentHandler;
         _updateDepartmentNameHandler = updateDepartmentNameHandler;
+        _logger = logger ?? Microsoft.Extensions.Logging.Abstractions.NullLogger<DepartmentsController>.Instance;
+        _diagnosticContext = diagnosticContext;
     }
 
     [HttpPost]
@@ -52,6 +58,10 @@ public sealed class DepartmentsController : ControllerBase
             departmentDto.LocationIds);
 
         var result = await _createDepartmentHandler.Handle(command, cancellationToken);
+        if (result.IsSuccess)
+        {
+            _diagnosticContext?.Set("DepartmentId", result.Value.Id);
+        }
         return result.ToCreatedEnvelopeResult();
     }
 
@@ -115,6 +125,7 @@ public sealed class DepartmentsController : ControllerBase
     {
         if (request.Id != id)
         {
+            _logger.LogWarning("Route ID {RouteDepartmentId} does not match request ID {RequestDepartmentId} for department name update", id, request.Id);
             ErrorList error = Errors.General.ValueIsInvalid(nameof(request.Id), "The route id and request id do not match.");
             return error.ToEnvelopeResult();
         }
