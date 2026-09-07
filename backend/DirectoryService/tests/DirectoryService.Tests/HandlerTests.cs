@@ -364,12 +364,29 @@ public sealed class HandlerTests
     {
         var deptRepo = new FakeDepartmentRepository();
         var deptId = Guid.NewGuid();
+        var dept = Department.Create(deptId, "Old Name", "old-name", null).Value;
+        deptRepo.Departments.Add(dept);
 
         var handler = new UpdateDepartmentNameHandler(deptRepo, new UpdateDepartmentNameCommandValidator());
         var result = await handler.Handle(new UpdateDepartmentNameCommand(deptId, "New Name"), CancellationToken.None);
 
         Assert.True(result.IsSuccess);
         Assert.Equal(deptId, result.Value);
+        Assert.Equal("New Name", deptRepo.Departments[0].Name);
+    }
+
+    [Fact]
+    public async Task UpdateDepartmentNameHandler_WhenDepartmentNotFound_ReturnsNotFoundError()
+    {
+        var deptRepo = new FakeDepartmentRepository();
+        var deptId = Guid.NewGuid();
+
+        var handler = new UpdateDepartmentNameHandler(deptRepo, new UpdateDepartmentNameCommandValidator());
+        var result = await handler.Handle(new UpdateDepartmentNameCommand(deptId, "New Name"), CancellationToken.None);
+
+        Assert.True(result.IsFailure);
+        Assert.Equal(ErrorType.NotFound, result.Error[0].Type);
+        Assert.Equal("department.not.found", result.Error[0].Code);
     }
 
     [Fact]

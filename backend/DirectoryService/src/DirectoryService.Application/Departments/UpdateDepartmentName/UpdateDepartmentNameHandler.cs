@@ -48,26 +48,37 @@ public sealed class UpdateDepartmentNameHandler : ICommandHandler<UpdateDepartme
             return Errors.Department.AlreadyExists(command.Name).ToErrorList();
         }
 
-        var updateResult = await _repository.UpdateDepartmentNameAsync(command.Id, command.Name, cancellationToken);
-        if (updateResult.IsFailure)
+        var departmentResult = await _repository.GetByIdAsync(command.Id, cancellationToken);
+        if (departmentResult.IsFailure)
         {
-            if (updateResult.Error.Type == ErrorType.NotFound)
+            if (departmentResult.Error.Type == ErrorType.NotFound)
             {
                 _logger.LogWarning("Department with ID {DepartmentId} was not found for renaming", command.Id);
             }
             else
             {
-                _logger.LogError("Database error while updating name for department {DepartmentId}: {ErrorMessage}", command.Id, updateResult.Error.Message);
+                _logger.LogError("Database error while retrieving department {DepartmentId}: {ErrorMessage}", command.Id, departmentResult.Error.Message);
             }
 
+            return departmentResult.Error.ToErrorList();
+        }
+
+        var department = departmentResult.Value;
+        var changeNameResult = department.ChangeName(command.Name);
+        if (changeNameResult.IsFailure)
+        {
+            _logger.LogWarning("Domain validation failed while renaming department {DepartmentId}: {@Errors}", command.Id, changeNameResult.Error);
+            return changeNameResult.Error.ToErrorList();
+        }
+
+        var updateResult = await _repository.UpdateAsync(department, cancellationToken);
+        if (updateResult.IsFailure)
+        {
+            _logger.LogError("Database error while updating name for department {DepartmentId}: {ErrorMessage}", command.Id, updateResult.Error.Message);
             return updateResult.Error.ToErrorList();
         }
 
         _logger.LogInformation("Department with ID {DepartmentId} renamed successfully to {DepartmentName}", command.Id, command.Name);
         return Result.Success<Guid, ErrorList>(command.Id);
     }
-
-    // ReSharper disable once UnusedMember.Global
-    public Task<Result<Guid, ErrorList>> Handle(UpdateDepartmentNameRequest request, CancellationToken cancellationToken = default) =>
-        Handle(new UpdateDepartmentNameCommand(request.Id, request.Name), cancellationToken);
 }

@@ -1,3 +1,3 @@
 namespace DirectoryService.Contracts;
 
-public record UpdateDepartmentNameRequest(Guid Id, string Name);
+public record UpdateDepartmentNameRequest(string Name);

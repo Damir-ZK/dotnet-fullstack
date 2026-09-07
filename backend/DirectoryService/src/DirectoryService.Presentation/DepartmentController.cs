@@ -124,15 +124,13 @@ public sealed class DepartmentsController : ControllerBase
         [FromBody] UpdateDepartmentNameRequest request,
         CancellationToken cancellationToken)
     {
-        if (request.Id != id)
+        var command = new UpdateDepartmentNameCommand(id, request.Name);
+        var result = await _updateDepartmentNameHandler.Handle(command, cancellationToken);
+        if (result.IsFailure)
         {
-            _logger.LogWarning("Route ID {RouteDepartmentId} does not match request ID {RequestDepartmentId} when updating department name", id, request.Id);
-            ErrorList error = Errors.General.ValueIsInvalid(nameof(request.Id), "The route id and request id do not match.");
-            return error.ToEnvelopeResult();
+            _logger.LogWarning("Failed to update department name for {DepartmentId}: {@Errors}", id, result.Error);
         }
 
-        var command = new UpdateDepartmentNameCommand(request.Id, request.Name);
-        var result = await _updateDepartmentNameHandler.Handle(command, cancellationToken);
         return result.ToEnvelopeResult();
     }
 }
