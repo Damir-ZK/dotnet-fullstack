@@ -118,6 +118,12 @@ public sealed class HandlerTests
                 ? UnitResult.Success<Error>()
                 : UnitResult.Failure(Errors.Department.LocationNotLinked(departmentId, locationId)));
         }
+
+        public Task<Result<IReadOnlyList<Guid>, Error>> GetLocationIdsAsync(Guid departmentId, CancellationToken cancellationToken)
+        {
+            IReadOnlyList<Guid> locIds = Links.Where(l => l.Item1 == departmentId).Select(l => l.Item2).ToList();
+            return Task.FromResult(Result.Success<IReadOnlyList<Guid>, Error>(locIds));
+        }
     }
 
     [Fact]
@@ -358,5 +364,26 @@ public sealed class HandlerTests
 
         Assert.True(result.IsSuccess);
         Assert.Equal(deptId, result.Value);
+    }
+
+    [Fact]
+    public async Task GetDepartmentByIdHandler_WhenDepartmentHasLocations_ReturnsActualLocationIds()
+    {
+        var deptRepo = new FakeDepartmentRepository();
+        var dept = Department.Create(Guid.NewGuid(), "Engineering", "engineering", null).Value;
+        var locId1 = Guid.NewGuid();
+        var locId2 = Guid.NewGuid();
+        deptRepo.Departments.Add(dept);
+        deptRepo.Links.Add((dept.Id, locId1));
+        deptRepo.Links.Add((dept.Id, locId2));
+
+        var handler = new GetDepartmentByIdHandler(deptRepo);
+        var result = await handler.Handle(new GetDepartmentByIdQuery(dept.Id), CancellationToken.None);
+
+        Assert.True(result.IsSuccess);
+        Assert.NotNull(result.Value.LocationIds);
+        Assert.Equal(2, result.Value.LocationIds.Count);
+        Assert.Contains(locId1, result.Value.LocationIds);
+        Assert.Contains(locId2, result.Value.LocationIds);
     }
 }

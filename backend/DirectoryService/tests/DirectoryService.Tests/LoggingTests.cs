@@ -268,6 +268,17 @@ public sealed class LoggingTests
                 ? UnitResult.Success<Error>()
                 : UnitResult.Failure(Errors.Department.LocationNotLinked(departmentId, locationId)));
         }
+
+        public Task<Result<IReadOnlyList<Guid>, Error>> GetLocationIdsAsync(Guid departmentId, CancellationToken cancellationToken)
+        {
+            if (ShouldFailWithDbError)
+            {
+                return Task.FromResult(Result.Failure<IReadOnlyList<Guid>, Error>(Error.Failure("db.error", "Database failure")));
+            }
+
+            IReadOnlyList<Guid> locIds = Links.Where(l => l.Item1 == departmentId).Select(l => l.Item2).ToList();
+            return Task.FromResult(Result.Success<IReadOnlyList<Guid>, Error>(locIds));
+        }
     }
 
     [Fact]

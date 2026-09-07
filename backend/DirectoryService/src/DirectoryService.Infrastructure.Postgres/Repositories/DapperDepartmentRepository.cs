@@ -313,4 +313,26 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
             return Errors.General.Database("A database error occurred while removing department location link.");
         }
     }
+
+    public async Task<Result<IReadOnlyList<Guid>, Error>> GetLocationIdsAsync(Guid departmentId, CancellationToken cancellationToken)
+    {
+        const string sql = """
+        SELECT location_id
+        FROM department_locations
+        WHERE department_id = @DepartmentId
+        """;
+
+        try
+        {
+            var locationIds = await _connection.QueryAsync<Guid>(
+                new CommandDefinition(sql, new { DepartmentId = departmentId }, cancellationToken: cancellationToken));
+
+            return Result.Success<IReadOnlyList<Guid>, Error>(locationIds.AsList());
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to fetch location ids for Department {DepartmentId}", departmentId);
+            return Errors.General.Database("A database error occurred while fetching department locations.");
+        }
+    }
 }

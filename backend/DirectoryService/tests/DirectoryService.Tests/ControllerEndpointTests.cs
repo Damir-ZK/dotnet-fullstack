@@ -110,6 +110,12 @@ public sealed class ControllerEndpointTests
                 ? UnitResult.Success<Error>()
                 : UnitResult.Failure(Errors.Department.LocationNotLinked(departmentId, locationId)));
         }
+
+        public Task<Result<IReadOnlyList<Guid>, Error>> GetLocationIdsAsync(Guid departmentId, CancellationToken cancellationToken)
+        {
+            IReadOnlyList<Guid> locIds = Links.Where(l => l.Item1 == departmentId).Select(l => l.Item2).ToList();
+            return Task.FromResult(Result.Success<IReadOnlyList<Guid>, Error>(locIds));
+        }
     }
 
     private static LocationsController CreateLocationsController(ILocationRepository locRepo)

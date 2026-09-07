@@ -70,6 +70,9 @@ public sealed class DependencyInjectionTests
 
         public Task<UnitResult<Error>> RemoveLocationLinkAsync(Guid departmentId, Guid locationId, CancellationToken cancellationToken) =>
             Task.FromResult(UnitResult.Success<Error>());
+
+        public Task<Result<IReadOnlyList<Guid>, Error>> GetLocationIdsAsync(Guid departmentId, CancellationToken cancellationToken) =>
+            Task.FromResult(Result.Success<IReadOnlyList<Guid>, Error>([]));
     }
 
     [Fact]

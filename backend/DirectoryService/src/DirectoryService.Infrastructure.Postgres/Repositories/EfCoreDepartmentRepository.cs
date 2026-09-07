@@ -236,4 +236,22 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
             return Errors.General.Database("A database error occurred while removing department location link.");
         }
     }
+
+    public async Task<Result<IReadOnlyList<Guid>, Error>> GetLocationIdsAsync(Guid departmentId, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var locationIds = await _dbContext.DepartmentLocations
+                .Where(link => link.DepartmentId == departmentId)
+                .Select(link => link.LocationId)
+                .ToListAsync(cancellationToken);
+
+            return Result.Success<IReadOnlyList<Guid>, Error>(locationIds);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to fetch location ids for Department {DepartmentId}", departmentId);
+            return Errors.General.Database("A database error occurred while fetching department locations.");
+        }
+    }
 }
