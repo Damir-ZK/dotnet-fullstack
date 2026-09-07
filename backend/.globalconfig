@@ -55,3 +55,24 @@ resharper_use_collection_expression_highlighting = none
 dotnet_diagnostic.IDE0300.severity = none
 dotnet_diagnostic.IDE0301.severity = none
 dotnet_diagnostic.IDE0305.severity = none
+
+# CA1716: имя типа Error конфликтует с ключевым словом Visual Basic — неактуально для C#
+dotnet_diagnostic.CA1716.severity = none
+
+# CA1040: пустые интерфейсы — маркерные интерфейсы (ICommand, IQuery) являются стандартом CQRS
+dotnet_diagnostic.CA1040.severity = none
+
+# CA1724: имя DependencyInjection конфликтует с Microsoft.Extensions.DependencyInjection — общепринятая конвенция .NET
+dotnet_diagnostic.CA1724.severity = none
+
+# CA1000: статические члены в generic типах — фабричные методы Envelope<T>.Ok / Envelope<T>.Error являются стандартной практикой C#
+dotnet_diagnostic.CA1000.severity = none
+
+# CA1002: замена List<T> на Collection<T> — устаревшая рекомендация времён .NET Framework 1.1/2.0
+dotnet_diagnostic.CA1002.severity = none
+
+# CA1515: предложение сделать типы internal — неприменимо для многопроектной архитектуры (Domain/Application/Contracts/Presentation)
+dotnet_diagnostic.CA1515.severity = none
+
+# CA2225: альтернативные именованные методы для операторов приведения — операторы в ErrorList идиоматичны для C#
+dotnet_diagnostic.CA2225.severity = none

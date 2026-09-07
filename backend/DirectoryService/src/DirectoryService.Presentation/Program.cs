@@ -1,61 +1,57 @@
-using System.Data;
+using System.Globalization;
 using DirectoryService.Application;
-using DirectoryService.Application.Departments;
-using DirectoryService.Application.Locations;
 using DirectoryService.Contracts;
-using DirectoryService.Infrastructure.Postgres;
-using DirectoryService.Infrastructure.Postgres.Repositories;
 using DirectoryService.Presentation;
-using Microsoft.EntityFrameworkCore;
-using Npgsql;
 using Scalar.AspNetCore;
+using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Console(formatProvider: CultureInfo.InvariantCulture)
+    .CreateBootstrapLogger();
 
-builder.Services.AddControllers();
-builder.Services.AddHealthChecks();
-builder.Services.AddOpenApi();
-
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
-builder.Services.AddScoped<IDbConnection>(_ =>
+try
 {
-    var connection = new NpgsqlConnection(builder.Configuration.GetConnectionString("Postgres"));
-    connection.Open();
-    return connection;
-});
+    Log.Information("Starting web application");
 
-var repositoryImplementation = builder.Configuration["Repository:Implementation"] ?? "EFCore";
+    var builder = WebApplication.CreateBuilder(args);
 
-if (repositoryImplementation.Equals("Dapper", StringComparison.OrdinalIgnoreCase))
-{
-    builder.Services.AddScoped<ILocationRepository, DapperLocationRepository>();
-    builder.Services.AddScoped<IDepartmentRepository, DapperDepartmentRepository>();
+    builder.Services.AddSerilogLogging(builder.Configuration, builder.Environment);
+    builder.Services.AddControllers();
+    builder.Services.AddHealthChecks();
+    builder.Services.AddOpenApi();
+
+    builder.Services.AddDatabase(builder.Configuration);
+    builder.Services.AddRepositories(builder.Configuration);
+
+    builder.Services.AddApplication();
+    builder.Services.AddScoped<IPositionsService, StubPositionsService>();
+
+    builder.Services.AddProblemDetails();
+    builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+
+    var app = builder.Build();
+
+    app.UseExceptionHandler();
+    app.UseDirectoryRequestLogging();
+
+    app.MapGet("/", () => "Hello World!");
+    app.MapHealthChecks("/health");
+    app.MapControllers();
+
+    if (app.Environment.IsDevelopment())
+    {
+        app.MapOpenApi();
+        app.MapScalarApiReference();
+    }
+
+    await app.RunAsync().ConfigureAwait(false);
 }
-else
+catch (Exception ex)
 {
-    builder.Services.AddScoped<ILocationRepository, EfCoreLocationRepository>();
-    builder.Services.AddScoped<IDepartmentRepository, EfCoreDepartmentRepository>();
+    Log.Fatal(ex, "Application terminated unexpectedly");
 }
-
-builder.Services.AddApplication();
-builder.Services.AddScoped<IPositionsService, StubPositionsService>();
-
-builder.Services.AddProblemDetails();
-builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
-
-var app = builder.Build();
-
-app.UseExceptionHandler();
-
-app.MapGet("/", () => "Hello World!");
-app.MapHealthChecks("/health");
-app.MapControllers();
-
-if (app.Environment.IsDevelopment())
+finally
 {
-    app.MapOpenApi();
-    app.MapScalarApiReference();
+    await Log.CloseAndFlushAsync().ConfigureAwait(false);
 }
-
-await app.RunAsync().ConfigureAwait(false);

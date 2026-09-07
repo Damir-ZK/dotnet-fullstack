@@ -20,7 +20,12 @@ public sealed class GlobalExceptionHandler : IExceptionHandler
         Exception exception,
         CancellationToken cancellationToken)
     {
-        _logger.LogError(exception, "An unhandled exception occurred: {Message}", exception.Message);
+        _logger.LogError(
+            exception,
+            "An unhandled exception occurred while processing {RequestMethod} {RequestPath}: {ErrorMessage}",
+            httpContext.Request.Method,
+            httpContext.Request.Path.Value,
+            exception.Message);
 
         httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
 

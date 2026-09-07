@@ -5,6 +5,8 @@ using DirectoryService.Contracts;
 using DirectoryService.Domain.Common;
 using DirectoryService.Domain.Departments;
 using FluentValidation;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 // ReSharper disable once CheckNamespace
 namespace DirectoryService.Application.Departments;
@@ -14,15 +16,18 @@ public sealed class CreateDepartmentHandler : ICommandHandler<CreateDepartmentCo
     private readonly IDepartmentRepository _departmentRepository;
     private readonly ILocationRepository _locationRepository;
     private readonly IValidator<CreateDepartmentCommand> _validator;
+    private readonly ILogger<CreateDepartmentHandler> _logger;
 
     public CreateDepartmentHandler(
         IDepartmentRepository departmentRepository,
         ILocationRepository locationRepository,
-        IValidator<CreateDepartmentCommand> validator)
+        IValidator<CreateDepartmentCommand> validator,
+        ILogger<CreateDepartmentHandler>? logger = null)
     {
         _departmentRepository = departmentRepository;
         _locationRepository = locationRepository;
         _validator = validator;
+        _logger = logger ?? NullLogger<CreateDepartmentHandler>.Instance;
     }
 
     public async Task<Result<DepartmentDto, ErrorList>> Handle(CreateDepartmentCommand command, CancellationToken cancellationToken = default)
@@ -30,17 +35,21 @@ public sealed class CreateDepartmentHandler : ICommandHandler<CreateDepartmentCo
         var validationResult = await _validator.ValidateAsync(command, cancellationToken);
         if (!validationResult.IsValid)
         {
-            return validationResult.ToErrorList();
+            var errors = validationResult.ToErrorList();
+            _logger.LogWarning("Validation failed while creating department {DepartmentName}: {@Errors}", command.Name, errors);
+            return errors;
         }
 
         var nameExistsResult = await _departmentRepository.NameExistsAsync(command.Name, cancellationToken);
         if (nameExistsResult.IsFailure)
         {
+            _logger.LogError("Database error while checking if department name exists {DepartmentName}: {ErrorMessage}", command.Name, nameExistsResult.Error.Message);
             return nameExistsResult.Error.ToErrorList();
         }
 
         if (nameExistsResult.Value)
         {
+            _logger.LogWarning("Department with Name {DepartmentName} already exists", command.Name);
             return Errors.Department.AlreadyExists(command.Name).ToErrorList();
         }
 
@@ -50,6 +59,7 @@ public sealed class CreateDepartmentHandler : ICommandHandler<CreateDepartmentCo
             var parentResult = await _departmentRepository.GetByIdAsync(command.ParentId.Value, cancellationToken);
             if (parentResult.IsFailure)
             {
+                _logger.LogWarning("Parent department with ID {ParentDepartmentId} was not found while creating department {DepartmentName}", command.ParentId.Value, command.Name);
                 return Errors.Department.ParentNotFound(command.ParentId.Value).ToErrorList();
             }
 
@@ -62,6 +72,7 @@ public sealed class CreateDepartmentHandler : ICommandHandler<CreateDepartmentCo
             var locResult = await _locationRepository.GetByIdAsync(locationId, cancellationToken);
             if (locResult.IsFailure)
             {
+                _logger.LogWarning("Location with ID {LocationId} was not found while creating department {DepartmentName}", locationId, command.Name);
                 return Errors.Location.NotFound(locationId).ToErrorList();
             }
         }
@@ -69,6 +80,7 @@ public sealed class CreateDepartmentHandler : ICommandHandler<CreateDepartmentCo
         var deptResult = Department.Create(Guid.NewGuid(), command.Name, command.Slug, parentDepartment);
         if (deptResult.IsFailure)
         {
+            _logger.LogWarning("Domain validation failed while creating department {DepartmentName}: {@Errors}", command.Name, deptResult.Error);
             return deptResult.Error.ToErrorList();
         }
 
@@ -76,6 +88,7 @@ public sealed class CreateDepartmentHandler : ICommandHandler<CreateDepartmentCo
         var addResult = await _departmentRepository.AddAsync(department, locationIds, cancellationToken);
         if (addResult.IsFailure)
         {
+            _logger.LogError("Database error while adding department {DepartmentName}: {ErrorMessage}", command.Name, addResult.Error.Message);
             return addResult.Error.ToErrorList();
         }
 
@@ -87,6 +100,7 @@ public sealed class CreateDepartmentHandler : ICommandHandler<CreateDepartmentCo
             department.ParentId,
             locationIds);
 
+        _logger.LogInformation("Department created successfully with ID {DepartmentId}, Name {DepartmentName}, and Slug {DepartmentSlug}", department.Id, department.Name, department.Slug);
         return Result.Success<DepartmentDto, ErrorList>(dto);
     }
 

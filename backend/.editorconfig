@@ -1,0 +1,16 @@
+# EditorConfig for backend projects
+root = true
+
+[*.cs]
+# CA1848: For improved performance, use the LoggerMessage delegates
+dotnet_diagnostic.CA1848.severity = none
+
+# CA1031: Modify method to catch a more specific allowed exception type, or rethrow
+dotnet_diagnostic.CA1031.severity = none
+
+# CA1861: Prefer 'static readonly' fields over constant array arguments
+dotnet_diagnostic.CA1861.severity = none
+
+# Treat EF Core migrations as generated code so analyzers do not report warnings on migrations
+[**/Migrations/**]
+generated_code = true

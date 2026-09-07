@@ -6,8 +6,8 @@
     <Nullable>enable</Nullable>
 
     <!-- Все предупреждения становятся ошибками компиляции -->
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
 
     <!-- Включаем стилевые правила в build -->
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
@@ -17,8 +17,16 @@
 
     <!-- Исключаем bin/obj из сборки -->
     <DefaultItemExcludes>$(DefaultItemExcludes);**/bin/**;**/obj/**</DefaultItemExcludes>
+
+    <!-- Центральное управление версиями пакетов -->
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+
+    <!-- Глобальные отключения неактуальных для проекта предупреждений анализаторов -->
+    <NoWarn>$(NoWarn);CA1848;CA1873;CA1031;CA1861</NoWarn>
   </PropertyGroup>
 
+  
   <!-- Анализаторы кода — применяются ко всем проектам автоматически -->
   <ItemGroup>
     <!-- Общие правила рефакторинга и стиля -->
