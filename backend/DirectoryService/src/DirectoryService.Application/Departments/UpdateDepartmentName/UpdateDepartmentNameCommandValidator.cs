@@ -16,7 +16,7 @@ public sealed class UpdateDepartmentNameCommandValidator : AbstractValidator<Upd
             .NotEmpty()
             .WithMessage("Department name is required.")
             .MaximumLength(AppConstants.MaxNameLength)
-            .WithMessage("Department name cannot exceed 200 characters.");
+            .WithMessage($"Department name cannot exceed {AppConstants.MaxNameLength} characters.");
     }
 }
 
@@ -33,6 +33,6 @@ public sealed class UpdateDepartmentNameRequestValidator : AbstractValidator<Upd
             .NotEmpty()
             .WithMessage("Department name is required.")
             .MaximumLength(AppConstants.MaxNameLength)
-            .WithMessage("Department name cannot exceed 200 characters.");
+            .WithMessage($"Department name cannot exceed {AppConstants.MaxNameLength} characters.");
     }
 }

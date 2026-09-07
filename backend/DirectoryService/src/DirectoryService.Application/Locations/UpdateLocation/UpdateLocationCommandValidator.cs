@@ -16,13 +16,13 @@ public sealed class UpdateLocationCommandValidator : AbstractValidator<UpdateLoc
             .NotEmpty()
             .WithMessage("Location name is required.")
             .MaximumLength(AppConstants.MaxNameLength)
-            .WithMessage("Location name cannot exceed 200 characters.");
+            .WithMessage($"Location name cannot exceed {AppConstants.MaxNameLength} characters.");
 
         RuleFor(x => x.Address)
             .NotEmpty()
             .WithMessage("Location address is required.")
             .MaximumLength(AppConstants.MaxAddressLength)
-            .WithMessage("Location address cannot exceed 500 characters.");
+            .WithMessage($"Location address cannot exceed {AppConstants.MaxAddressLength} characters.");
     }
 }
 
@@ -35,12 +35,12 @@ public sealed class UpdateLocationDtoValidator : AbstractValidator<UpdateLocatio
             .NotEmpty()
             .WithMessage("Location name is required.")
             .MaximumLength(AppConstants.MaxNameLength)
-            .WithMessage("Location name cannot exceed 200 characters.");
+            .WithMessage($"Location name cannot exceed {AppConstants.MaxNameLength} characters.");
 
         RuleFor(x => x.Address)
             .NotEmpty()
             .WithMessage("Location address is required.")
             .MaximumLength(AppConstants.MaxAddressLength)
-            .WithMessage("Location address cannot exceed 500 characters.");
+            .WithMessage($"Location address cannot exceed {AppConstants.MaxAddressLength} characters.");
     }
 }

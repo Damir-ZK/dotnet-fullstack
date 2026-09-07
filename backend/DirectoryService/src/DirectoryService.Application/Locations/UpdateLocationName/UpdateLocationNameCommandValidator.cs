@@ -16,7 +16,7 @@ public sealed class UpdateLocationNameCommandValidator : AbstractValidator<Updat
             .NotEmpty()
             .WithMessage("Location name is required.")
             .MaximumLength(AppConstants.MaxNameLength)
-            .WithMessage("Location name cannot exceed 200 characters.");
+            .WithMessage($"Location name cannot exceed {AppConstants.MaxNameLength} characters.");
     }
 }
 
@@ -33,6 +33,6 @@ public sealed class UpdateLocationNameRequestValidator : AbstractValidator<Updat
             .NotEmpty()
             .WithMessage("Location name is required.")
             .MaximumLength(AppConstants.MaxNameLength)
-            .WithMessage("Location name cannot exceed 200 characters.");
+            .WithMessage($"Location name cannot exceed {AppConstants.MaxNameLength} characters.");
     }
 }

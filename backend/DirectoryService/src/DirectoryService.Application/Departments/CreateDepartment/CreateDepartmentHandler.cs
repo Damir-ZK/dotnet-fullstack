@@ -8,6 +8,7 @@ using FluentValidation;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
+
 // ReSharper disable once CheckNamespace
 namespace DirectoryService.Application.Departments;
 

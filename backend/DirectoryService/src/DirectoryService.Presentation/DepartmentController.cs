@@ -10,6 +10,7 @@ namespace DirectoryService.Presentation;
 [ApiController]
 [Route("departments")]
 [ProducesResponseType(typeof(Envelope), StatusCodes.Status500InternalServerError)]
+#pragma warning disable S107 // Methods should not have too many parameters
 #pragma warning disable S6960 // Controllers should not have multiple responsibilities
 public sealed class DepartmentsController : ControllerBase
 {
@@ -125,7 +126,7 @@ public sealed class DepartmentsController : ControllerBase
     {
         if (request.Id != id)
         {
-            _logger.LogWarning("Route ID {RouteDepartmentId} does not match request ID {RequestDepartmentId} for department name update", id, request.Id);
+            _logger.LogWarning("Route ID {RouteDepartmentId} does not match request ID {RequestDepartmentId} when updating department name", id, request.Id);
             ErrorList error = Errors.General.ValueIsInvalid(nameof(request.Id), "The route id and request id do not match.");
             return error.ToEnvelopeResult();
         }

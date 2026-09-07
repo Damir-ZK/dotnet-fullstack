@@ -1,3 +1,4 @@
+using DirectoryService.Application;
 using DirectoryService.Application.Common;
 using DirectoryService.Application.Departments;
 using DirectoryService.Application.Locations;
@@ -39,5 +40,34 @@ public sealed class ValidationTests
         var errorList = result.ToErrorList();
         Assert.True(errorList.Count >= 2);
         Assert.All(errorList, e => Assert.Equal(ErrorType.Validation, e.Type));
+    }
+    [Fact]
+    public async Task CreateDepartmentDtoValidator_WhenNameExceedsMaxLength_ReturnsExpectedErrorMessage()
+    {
+        var validator = new CreateDepartmentDtoValidator();
+        var dto = new CreateDepartmentDto(new string('a', AppConstants.MaxNameLength + 1), "valid-slug", null, null);
+
+        var result = await validator.ValidateAsync(dto);
+
+        Assert.False(result.IsValid);
+        Assert.Contains(result.Errors, e => e.PropertyName == nameof(CreateDepartmentDto.Name)
+            && e.ErrorMessage == $"Department name cannot exceed {AppConstants.MaxNameLength} characters.");
+    }
+
+    [Fact]
+    public async Task CreateLocationDtoValidator_WhenFieldsExceedMaxLength_ReturnsExpectedErrorMessages()
+    {
+        var validator = new CreateLocationDtoValidator();
+        var dto = new CreateLocationDto(
+            new string('a', AppConstants.MaxNameLength + 1),
+            new string('b', AppConstants.MaxAddressLength + 1));
+
+        var result = await validator.ValidateAsync(dto);
+
+        Assert.False(result.IsValid);
+        Assert.Contains(result.Errors, e => e.PropertyName == nameof(CreateLocationDto.Name)
+            && e.ErrorMessage == $"Location name cannot exceed {AppConstants.MaxNameLength} characters.");
+        Assert.Contains(result.Errors, e => e.PropertyName == nameof(CreateLocationDto.Address)
+            && e.ErrorMessage == $"Location address cannot exceed {AppConstants.MaxAddressLength} characters.");
     }
 }

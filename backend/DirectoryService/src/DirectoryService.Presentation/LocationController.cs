@@ -10,6 +10,7 @@ namespace DirectoryService.Presentation;
 [ApiController]
 [Route("locations")]
 [ProducesResponseType(typeof(Envelope), StatusCodes.Status500InternalServerError)]
+#pragma warning disable S107 // Methods should not have too many parameters
 #pragma warning disable S6960 // Controllers should not have multiple responsibilities
 public sealed class LocationsController : ControllerBase
 {
@@ -119,7 +120,7 @@ public sealed class LocationsController : ControllerBase
     {
         if (request.Id != id)
         {
-            _logger.LogWarning("Route ID {RouteLocationId} does not match request ID {RequestLocationId} for location name update", id, request.Id);
+            _logger.LogWarning("Route ID {RouteLocationId} does not match request ID {RequestLocationId} when updating location name", id, request.Id);
             ErrorList error = Errors.General.ValueIsInvalid(nameof(request.Id), "The route id and request id do not match.");
             return error.ToEnvelopeResult();
         }
