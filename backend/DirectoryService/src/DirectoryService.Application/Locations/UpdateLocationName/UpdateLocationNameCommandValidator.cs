@@ -19,20 +19,3 @@ public sealed class UpdateLocationNameCommandValidator : AbstractValidator<Updat
             .WithMessage($"Location name cannot exceed {AppConstants.MaxNameLength} characters.");
     }
 }
-
-// ReSharper disable once UnusedType.Global
-public sealed class UpdateLocationNameRequestValidator : AbstractValidator<UpdateLocationNameRequest>
-{
-    public UpdateLocationNameRequestValidator()
-    {
-        RuleFor(x => x.Id)
-            .NotEmpty()
-            .WithMessage("Location id is required.");
-
-        RuleFor(x => x.Name)
-            .NotEmpty()
-            .WithMessage("Location name is required.")
-            .MaximumLength(AppConstants.MaxNameLength)
-            .WithMessage($"Location name cannot exceed {AppConstants.MaxNameLength} characters.");
-    }
-}

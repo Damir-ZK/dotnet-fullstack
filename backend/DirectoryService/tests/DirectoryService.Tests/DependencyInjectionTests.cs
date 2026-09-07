@@ -132,16 +132,10 @@ public sealed class DependencyInjectionTests
 
         // Validators
         Assert.NotNull(sp.GetService<IValidator<CreateLocationCommand>>());
-        Assert.NotNull(sp.GetService<IValidator<CreateLocationDto>>());
         Assert.NotNull(sp.GetService<IValidator<UpdateLocationCommand>>());
-        Assert.NotNull(sp.GetService<IValidator<UpdateLocationDto>>());
         Assert.NotNull(sp.GetService<IValidator<UpdateLocationNameCommand>>());
-        Assert.NotNull(sp.GetService<IValidator<UpdateLocationNameRequest>>());
         Assert.NotNull(sp.GetService<IValidator<CreateDepartmentCommand>>());
-        Assert.NotNull(sp.GetService<IValidator<CreateDepartmentDto>>());
         Assert.NotNull(sp.GetService<IValidator<UpdateDepartmentCommand>>());
-        Assert.NotNull(sp.GetService<IValidator<UpdateDepartmentDto>>());
         Assert.NotNull(sp.GetService<IValidator<UpdateDepartmentNameCommand>>());
-        Assert.NotNull(sp.GetService<IValidator<UpdateDepartmentNameRequest>>());
     }
 }

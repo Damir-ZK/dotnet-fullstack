@@ -138,8 +138,8 @@ public sealed class HandlerTests
         var repo = new FakeLocationRepository();
         repo.Locations.Add(Location.Create(Guid.NewGuid(), "Existing Office", "Address").Value);
 
-        var handler = new CreateLocation(repo, new CreateLocationDtoValidator());
-        var result = await handler.ExecuteAsync(new CreateLocationDto("Existing Office", "New Address"), CancellationToken.None);
+        var handler = new CreateLocationHandler(repo, new CreateLocationCommandValidator());
+        var result = await handler.Handle(new CreateLocationCommand("Existing Office", "New Address"), CancellationToken.None);
 
         Assert.True(result.IsFailure);
         Assert.Equal(ErrorType.Conflict, result.Error[0].Type);
@@ -151,8 +151,8 @@ public sealed class HandlerTests
     {
         var repo = new FakeLocationRepository { ShouldFailWithDbError = true };
 
-        var handler = new CreateLocation(repo, new CreateLocationDtoValidator());
-        var result = await handler.ExecuteAsync(new CreateLocationDto("New Office", "Address"), CancellationToken.None);
+        var handler = new CreateLocationHandler(repo, new CreateLocationCommandValidator());
+        var result = await handler.Handle(new CreateLocationCommand("New Office", "Address"), CancellationToken.None);
 
         Assert.True(result.IsFailure);
         Assert.Equal(ErrorType.Failure, result.Error[0].Type);
@@ -166,9 +166,9 @@ public sealed class HandlerTests
         var locRepo = new FakeLocationRepository();
         var nonExistentLocId = Guid.NewGuid();
 
-        var handler = new CreateDepartment(deptRepo, locRepo, new CreateDepartmentDtoValidator());
-        var result = await handler.ExecuteAsync(
-            new CreateDepartmentDto("Engineering", "engineering", null, [nonExistentLocId]),
+        var handler = new CreateDepartmentHandler(deptRepo, locRepo, new CreateDepartmentCommandValidator());
+        var result = await handler.Handle(
+            new CreateDepartmentCommand("Engineering", "engineering", null, [nonExistentLocId]),
             CancellationToken.None);
 
         Assert.True(result.IsFailure);
@@ -183,9 +183,9 @@ public sealed class HandlerTests
         var locRepo = new FakeLocationRepository();
         var nonExistentParentId = Guid.NewGuid();
 
-        var handler = new CreateDepartment(deptRepo, locRepo, new CreateDepartmentDtoValidator());
-        var result = await handler.ExecuteAsync(
-            new CreateDepartmentDto("Engineering", "engineering", nonExistentParentId, null),
+        var handler = new CreateDepartmentHandler(deptRepo, locRepo, new CreateDepartmentCommandValidator());
+        var result = await handler.Handle(
+            new CreateDepartmentCommand("Engineering", "engineering", nonExistentParentId, null),
             CancellationToken.None);
 
         Assert.True(result.IsFailure);

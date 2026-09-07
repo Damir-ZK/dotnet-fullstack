@@ -104,28 +104,4 @@ public sealed class CreateDepartmentHandler : ICommandHandler<CreateDepartmentCo
         _logger.LogInformation("Department created successfully with ID {DepartmentId}, Name {DepartmentName}, and Slug {DepartmentSlug}", department.Id, department.Name, department.Slug);
         return Result.Success<DepartmentDto, ErrorList>(dto);
     }
-
-    public async Task<Result<Guid, ErrorList>> ExecuteAsync(CreateDepartmentDto dto, CancellationToken cancellationToken = default)
-    {
-        var command = new CreateDepartmentCommand(dto.Name, dto.Slug, dto.ParentId, dto.LocationIds);
-        var result = await Handle(command, cancellationToken);
-        return result.Map(dept => dept.Id);
-    }
-}
-
-public sealed class CreateDepartment
-{
-    private readonly CreateDepartmentHandler _handler;
-
-    public CreateDepartment(
-        IDepartmentRepository departmentRepository,
-        ILocationRepository locationRepository,
-        IValidator<CreateDepartmentDto> validator)
-    {
-        _ = validator;
-        _handler = new CreateDepartmentHandler(departmentRepository, locationRepository, new CreateDepartmentCommandValidator());
-    }
-
-    public Task<Result<Guid, ErrorList>> ExecuteAsync(CreateDepartmentDto dto, CancellationToken cancellationToken = default) =>
-        _handler.ExecuteAsync(dto, cancellationToken);
 }

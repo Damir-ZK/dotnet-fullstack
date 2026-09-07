@@ -19,16 +19,3 @@ public sealed class UpdateDepartmentCommandValidator : AbstractValidator<UpdateD
             .WithMessage($"Department name cannot exceed {AppConstants.MaxNameLength} characters.");
     }
 }
-
-// ReSharper disable once UnusedType.Global
-public sealed class UpdateDepartmentDtoValidator : AbstractValidator<UpdateDepartmentDto>
-{
-    public UpdateDepartmentDtoValidator()
-    {
-        RuleFor(x => x.Name)
-            .NotEmpty()
-            .WithMessage("Department name is required.")
-            .MaximumLength(AppConstants.MaxNameLength)
-            .WithMessage($"Department name cannot exceed {AppConstants.MaxNameLength} characters.");
-    }
-}

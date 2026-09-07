@@ -67,21 +67,4 @@ public sealed class CreateLocationHandler : ICommandHandler<CreateLocationComman
         _logger.LogInformation("Location created successfully with ID {LocationId} and Name {LocationName}", locationResult.Value.Id, locationResult.Value.Name);
         return Result.Success<Guid, ErrorList>(locationResult.Value.Id);
     }
-
-    public Task<Result<Guid, ErrorList>> ExecuteAsync(CreateLocationDto dto, CancellationToken cancellationToken = default) =>
-        Handle(new CreateLocationCommand(dto.Name, dto.Address), cancellationToken);
-}
-
-public sealed class CreateLocation
-{
-    private readonly CreateLocationHandler _handler;
-
-    public CreateLocation(ILocationRepository locationRepository, IValidator<CreateLocationDto> validator)
-    {
-        _ = validator;
-        _handler = new CreateLocationHandler(locationRepository, new CreateLocationCommandValidator());
-    }
-
-    public Task<Result<Guid, ErrorList>> ExecuteAsync(CreateLocationDto dto, CancellationToken cancellationToken = default) =>
-        _handler.ExecuteAsync(dto, cancellationToken);
 }
