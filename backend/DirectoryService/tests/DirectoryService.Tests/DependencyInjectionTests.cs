@@ -20,6 +20,9 @@ public sealed class DependencyInjectionTests
         public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken) =>
             Task.FromResult(Result.Success<bool, Error>(false));
 
+        public Task<Result<bool, Error>> NameExistsAsync(string name, Guid? excludeId, CancellationToken cancellationToken) =>
+            Task.FromResult(Result.Success<bool, Error>(false));
+
         public Task<UnitResult<Error>> AddAsync(Location location, CancellationToken cancellationToken) =>
             Task.FromResult(UnitResult.Success<Error>());
 
@@ -42,6 +45,9 @@ public sealed class DependencyInjectionTests
     private sealed class DummyDepartmentRepository : IDepartmentRepository
     {
         public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken) =>
+            Task.FromResult(Result.Success<bool, Error>(false));
+
+        public Task<Result<bool, Error>> NameExistsAsync(string name, Guid? excludeId, CancellationToken cancellationToken) =>
             Task.FromResult(Result.Success<bool, Error>(false));
 
         public Task<UnitResult<Error>> AddAsync(Department department, IReadOnlyCollection<Guid> locationIds, CancellationToken cancellationToken) =>

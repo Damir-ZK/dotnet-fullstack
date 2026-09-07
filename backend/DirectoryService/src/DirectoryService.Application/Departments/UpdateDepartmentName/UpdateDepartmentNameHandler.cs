@@ -35,6 +35,19 @@ public sealed class UpdateDepartmentNameHandler : ICommandHandler<UpdateDepartme
             return errors;
         }
 
+        var nameExistsResult = await _repository.NameExistsAsync(command.Name, command.Id, cancellationToken);
+        if (nameExistsResult.IsFailure)
+        {
+            _logger.LogError("Database error while checking if department name exists {DepartmentName}: {ErrorMessage}", command.Name, nameExistsResult.Error.Message);
+            return nameExistsResult.Error.ToErrorList();
+        }
+
+        if (nameExistsResult.Value)
+        {
+            _logger.LogWarning("Department with Name {DepartmentName} already exists", command.Name);
+            return Errors.Department.AlreadyExists(command.Name).ToErrorList();
+        }
+
         var updateResult = await _repository.UpdateDepartmentNameAsync(command.Id, command.Name, cancellationToken);
         if (updateResult.IsFailure)
         {

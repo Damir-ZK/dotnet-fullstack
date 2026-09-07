@@ -47,5 +47,11 @@ public sealed class DepartmentConfiguration : IEntityTypeConfiguration<Departmen
             .WithMany()
             .HasForeignKey(d => d.ParentId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasIndex(d => d.Name)
+            .IsUnique();
+
+        builder.HasIndex(d => d.Slug)
+            .IsUnique();
     }
 }

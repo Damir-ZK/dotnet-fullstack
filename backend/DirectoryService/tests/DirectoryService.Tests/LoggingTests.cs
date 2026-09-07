@@ -71,14 +71,17 @@ public sealed class LoggingTests
         public List<Location> Locations { get; } = [];
         public bool ShouldFailWithDbError { get; init; }
 
-        public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken)
+        public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken) =>
+            NameExistsAsync(name, null, cancellationToken);
+
+        public Task<Result<bool, Error>> NameExistsAsync(string name, Guid? excludeId, CancellationToken cancellationToken)
         {
             if (ShouldFailWithDbError)
             {
                 return Task.FromResult(Result.Failure<bool, Error>(Error.Failure("db.error", "Database failure")));
             }
 
-            return Task.FromResult(Result.Success<bool, Error>(Locations.Any(l => string.Equals(l.Name, name, StringComparison.OrdinalIgnoreCase))));
+            return Task.FromResult(Result.Success<bool, Error>(Locations.Any(l => (!excludeId.HasValue || l.Id != excludeId.Value) && string.Equals(l.Name, name, StringComparison.OrdinalIgnoreCase))));
         }
 
         public Task<UnitResult<Error>> AddAsync(Location location, CancellationToken cancellationToken)
@@ -154,14 +157,17 @@ public sealed class LoggingTests
         public HashSet<(Guid, Guid)> Links { get; } = [];
         public bool ShouldFailWithDbError { get; init; }
 
-        public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken)
+        public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken) =>
+            NameExistsAsync(name, null, cancellationToken);
+
+        public Task<Result<bool, Error>> NameExistsAsync(string name, Guid? excludeId, CancellationToken cancellationToken)
         {
             if (ShouldFailWithDbError)
             {
                 return Task.FromResult(Result.Failure<bool, Error>(Error.Failure("db.error", "Database failure")));
             }
 
-            return Task.FromResult(Result.Success<bool, Error>(Departments.Any(d => string.Equals(d.Name, name, StringComparison.OrdinalIgnoreCase))));
+            return Task.FromResult(Result.Success<bool, Error>(Departments.Any(d => (!excludeId.HasValue || d.Id != excludeId.Value) && string.Equals(d.Name, name, StringComparison.OrdinalIgnoreCase))));
         }
 
         public Task<UnitResult<Error>> AddAsync(Department department, IReadOnlyCollection<Guid> locationIds, CancellationToken cancellationToken)

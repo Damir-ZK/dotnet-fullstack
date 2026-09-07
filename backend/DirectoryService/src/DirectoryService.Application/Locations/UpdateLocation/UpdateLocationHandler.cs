@@ -34,6 +34,19 @@ public sealed class UpdateLocationHandler : ICommandHandler<UpdateLocationComman
             return errors;
         }
 
+        var nameExistsResult = await _locationRepository.NameExistsAsync(command.Name, command.Id, cancellationToken);
+        if (nameExistsResult.IsFailure)
+        {
+            _logger.LogError("Database error while checking if location name exists {LocationName}: {ErrorMessage}", command.Name, nameExistsResult.Error.Message);
+            return nameExistsResult.Error.ToErrorList();
+        }
+
+        if (nameExistsResult.Value)
+        {
+            _logger.LogWarning("Location with Name {LocationName} already exists", command.Name);
+            return Errors.Location.AlreadyExists(command.Name).ToErrorList();
+        }
+
         var locationResult = await _locationRepository.GetByIdAsync(command.Id, cancellationToken);
         if (locationResult.IsFailure)
         {

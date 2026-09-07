@@ -33,5 +33,8 @@ public sealed class LocationConfiguration : IEntityTypeConfiguration<Location>
         builder.Property(l => l.UpdatedAt)
             .HasColumnName("updated_at")
             .IsRequired();
+
+        builder.HasIndex(l => l.Name)
+            .IsUnique();
     }
 }

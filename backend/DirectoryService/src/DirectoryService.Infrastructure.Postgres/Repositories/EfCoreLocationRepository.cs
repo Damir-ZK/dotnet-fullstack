@@ -18,12 +18,22 @@ public sealed class EfCoreLocationRepository : ILocationRepository
         _logger = logger;
     }
 
-    public async Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken)
+    public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken) =>
+        NameExistsAsync(name, null, cancellationToken);
+
+    public async Task<Result<bool, Error>> NameExistsAsync(string name, Guid? excludeId, CancellationToken cancellationToken)
     {
         try
         {
-            var exists = await _dbContext.Locations
-                .AnyAsync(l => string.Equals(l.Name, name, StringComparison.OrdinalIgnoreCase), cancellationToken);
+            var query = _dbContext.Locations
+                .Where(l => string.Equals(l.Name, name, StringComparison.OrdinalIgnoreCase));
+
+            if (excludeId.HasValue)
+            {
+                query = query.Where(l => l.Id != excludeId.Value);
+            }
+
+            var exists = await query.AnyAsync(cancellationToken);
             return Result.Success<bool, Error>(exists);
         }
         catch (Exception ex)

@@ -18,12 +18,22 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
         _logger = logger;
     }
 
-    public async Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken)
+    public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken) =>
+        NameExistsAsync(name, null, cancellationToken);
+
+    public async Task<Result<bool, Error>> NameExistsAsync(string name, Guid? excludeId, CancellationToken cancellationToken)
     {
         try
         {
-            var exists = await _dbContext.Departments
-                .AnyAsync(d => string.Equals(d.Name, name, StringComparison.OrdinalIgnoreCase), cancellationToken);
+            var query = _dbContext.Departments
+                .Where(d => string.Equals(d.Name, name, StringComparison.OrdinalIgnoreCase));
+
+            if (excludeId.HasValue)
+            {
+                query = query.Where(d => d.Id != excludeId.Value);
+            }
+
+            var exists = await query.AnyAsync(cancellationToken);
             return Result.Success<bool, Error>(exists);
         }
         catch (Exception ex)

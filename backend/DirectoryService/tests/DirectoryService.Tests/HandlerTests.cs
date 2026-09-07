@@ -16,14 +16,17 @@ public sealed class HandlerTests
         public List<Location> Locations { get; } = [];
         public bool ShouldFailWithDbError { get; init; }
 
-        public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken)
+        public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken) =>
+            NameExistsAsync(name, null, cancellationToken);
+
+        public Task<Result<bool, Error>> NameExistsAsync(string name, Guid? excludeId, CancellationToken cancellationToken)
         {
             if (ShouldFailWithDbError)
             {
                 return Task.FromResult(Result.Failure<bool, Error>(Error.Failure("database.error", "DB failure")));
             }
 
-            return Task.FromResult(Result.Success<bool, Error>(Locations.Any(l => string.Equals(l.Name, name, StringComparison.OrdinalIgnoreCase))));
+            return Task.FromResult(Result.Success<bool, Error>(Locations.Any(l => (!excludeId.HasValue || l.Id != excludeId.Value) && string.Equals(l.Name, name, StringComparison.OrdinalIgnoreCase))));
         }
 
         public Task<UnitResult<Error>> AddAsync(Location location, CancellationToken cancellationToken)
@@ -67,7 +70,10 @@ public sealed class HandlerTests
         public HashSet<(Guid, Guid)> Links { get; } = [];
 
         public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken) =>
-            Task.FromResult(Result.Success<bool, Error>(Departments.Any(d => string.Equals(d.Name, name, StringComparison.OrdinalIgnoreCase))));
+            NameExistsAsync(name, null, cancellationToken);
+
+        public Task<Result<bool, Error>> NameExistsAsync(string name, Guid? excludeId, CancellationToken cancellationToken) =>
+            Task.FromResult(Result.Success<bool, Error>(Departments.Any(d => (!excludeId.HasValue || d.Id != excludeId.Value) && string.Equals(d.Name, name, StringComparison.OrdinalIgnoreCase))));
 
         public Task<UnitResult<Error>> AddAsync(Department department, IReadOnlyCollection<Guid> locationIds, CancellationToken cancellationToken)
         {
@@ -385,5 +391,39 @@ public sealed class HandlerTests
         Assert.Equal(2, result.Value.LocationIds.Count);
         Assert.Contains(locId1, result.Value.LocationIds);
         Assert.Contains(locId2, result.Value.LocationIds);
+    }
+
+    [Fact]
+    public async Task UpdateDepartmentHandler_WithDuplicateName_ReturnsConflictError()
+    {
+        var deptRepo = new FakeDepartmentRepository();
+        var dept1 = Department.Create(Guid.NewGuid(), "HR", "hr", null).Value;
+        var dept2 = Department.Create(Guid.NewGuid(), "Finance", "finance", null).Value;
+        deptRepo.Departments.Add(dept1);
+        deptRepo.Departments.Add(dept2);
+
+        var handler = new UpdateDepartmentHandler(deptRepo, new UpdateDepartmentCommandValidator());
+        var result = await handler.Handle(new UpdateDepartmentCommand(dept2.Id, "HR"), CancellationToken.None);
+
+        Assert.True(result.IsFailure);
+        Assert.Equal(ErrorType.Conflict, result.Error[0].Type);
+        Assert.Equal("department.already.exists", result.Error[0].Code);
+    }
+
+    [Fact]
+    public async Task UpdateLocationHandler_WithDuplicateName_ReturnsConflictError()
+    {
+        var locRepo = new FakeLocationRepository();
+        var loc1 = Location.Create(Guid.NewGuid(), "HQ", "123 Main St").Value;
+        var loc2 = Location.Create(Guid.NewGuid(), "Branch", "456 Side St").Value;
+        locRepo.Locations.Add(loc1);
+        locRepo.Locations.Add(loc2);
+
+        var handler = new UpdateLocationHandler(locRepo, new UpdateLocationCommandValidator());
+        var result = await handler.Handle(new UpdateLocationCommand(loc2.Id, "HQ", "789 Other St"), CancellationToken.None);
+
+        Assert.True(result.IsFailure);
+        Assert.Equal(ErrorType.Conflict, result.Error[0].Type);
+        Assert.Equal("location.already.exists", result.Error[0].Code);
     }
 }

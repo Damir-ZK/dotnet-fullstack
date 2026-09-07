@@ -19,20 +19,23 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
         _logger = logger;
     }
 
-    public async Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken)
+    public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken) =>
+        NameExistsAsync(name, null, cancellationToken);
+
+    public async Task<Result<bool, Error>> NameExistsAsync(string name, Guid? excludeId, CancellationToken cancellationToken)
     {
         const string sql = """
         SELECT EXISTS(
             SELECT 1
             FROM departments
-            WHERE lower(name) = lower(@Name)
+            WHERE lower(name) = lower(@Name) AND (@ExcludeId IS NULL OR id != @ExcludeId)
         )
         """;
 
         try
         {
             var exists = await _connection.ExecuteScalarAsync<bool>(
-                new CommandDefinition(sql, new { Name = name }, cancellationToken: cancellationToken));
+                new CommandDefinition(sql, new { Name = name, ExcludeId = excludeId }, cancellationToken: cancellationToken));
             return Result.Success<bool, Error>(exists);
         }
         catch (Exception ex)
