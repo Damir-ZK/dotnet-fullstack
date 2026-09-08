@@ -19,21 +19,28 @@ public class DapperLocationRepository : ILocationRepository
         _logger = logger;
     }
 
-    public async Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken)
+    public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken) =>
+        NameExistsAsync(name, null, cancellationToken);
+
+    public async Task<Result<bool, Error>> NameExistsAsync(string name, Guid? excludeId, CancellationToken cancellationToken)
     {
         const string sql = """
                            SELECT EXISTS(
                                SELECT 1
                                FROM locations
-                               WHERE lower(name) = lower(@Name)
+                               WHERE lower(name) = lower(@Name) AND (@ExcludeId IS NULL OR id != @ExcludeId)
                            )
                            """;
 
         try
         {
             var exists = await _connection.ExecuteScalarAsync<bool>(
-                new CommandDefinition(sql, new { Name = name }, cancellationToken: cancellationToken));
+                new CommandDefinition(sql, new { Name = name, ExcludeId = excludeId }, cancellationToken: cancellationToken));
             return Result.Success<bool, Error>(exists);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -62,6 +69,10 @@ public class DapperLocationRepository : ILocationRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to save location {LocationId} with name {Name}", location.Id, location.Name);
@@ -81,6 +92,10 @@ public class DapperLocationRepository : ILocationRepository
             var locations = await _connection.QueryAsync<Location>(
                 new CommandDefinition(sql, cancellationToken: cancellationToken));
             return Result.Success<IReadOnlyList<Location>, Error>(locations.AsList());
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -108,6 +123,10 @@ public class DapperLocationRepository : ILocationRepository
             }
 
             return Result.Success<Location, Error>(location);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -139,6 +158,10 @@ public class DapperLocationRepository : ILocationRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to update location {LocationId}", location.Id);
@@ -167,6 +190,10 @@ public class DapperLocationRepository : ILocationRepository
             }
 
             return UnitResult.Success<Error>();
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -198,6 +225,10 @@ public class DapperLocationRepository : ILocationRepository
             }
 
             return UnitResult.Success<Error>();
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {

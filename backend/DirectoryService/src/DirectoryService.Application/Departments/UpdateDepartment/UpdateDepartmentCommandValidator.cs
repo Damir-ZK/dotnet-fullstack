@@ -1,4 +1,3 @@
-using DirectoryService.Contracts;
 using FluentValidation;
 
 // ReSharper disable once CheckNamespace
@@ -16,19 +15,6 @@ public sealed class UpdateDepartmentCommandValidator : AbstractValidator<UpdateD
             .NotEmpty()
             .WithMessage("Department name is required.")
             .MaximumLength(AppConstants.MaxNameLength)
-            .WithMessage("Department name cannot exceed 200 characters.");
-    }
-}
-
-// ReSharper disable once UnusedType.Global
-public sealed class UpdateDepartmentDtoValidator : AbstractValidator<UpdateDepartmentDto>
-{
-    public UpdateDepartmentDtoValidator()
-    {
-        RuleFor(x => x.Name)
-            .NotEmpty()
-            .WithMessage("Department name is required.")
-            .MaximumLength(AppConstants.MaxNameLength)
-            .WithMessage("Department name cannot exceed 200 characters.");
+            .WithMessage($"Department name cannot exceed {AppConstants.MaxNameLength} characters.");
     }
 }

@@ -18,13 +18,27 @@ public sealed class EfCoreLocationRepository : ILocationRepository
         _logger = logger;
     }
 
-    public async Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken)
+    public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken) =>
+        NameExistsAsync(name, null, cancellationToken);
+
+    public async Task<Result<bool, Error>> NameExistsAsync(string name, Guid? excludeId, CancellationToken cancellationToken)
     {
         try
         {
-            var exists = await _dbContext.Locations
-                .AnyAsync(l => string.Equals(l.Name, name, StringComparison.OrdinalIgnoreCase), cancellationToken);
+            var query = _dbContext.Locations
+                .Where(l => string.Equals(l.Name, name, StringComparison.OrdinalIgnoreCase));
+
+            if (excludeId.HasValue)
+            {
+                query = query.Where(l => l.Id != excludeId.Value);
+            }
+
+            var exists = await query.AnyAsync(cancellationToken);
             return Result.Success<bool, Error>(exists);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -41,6 +55,10 @@ public sealed class EfCoreLocationRepository : ILocationRepository
             await _dbContext.SaveChangesAsync(cancellationToken);
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to save location {LocationId} with name {Name}", location.Id, location.Name);
@@ -56,6 +74,10 @@ public sealed class EfCoreLocationRepository : ILocationRepository
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
             return Result.Success<IReadOnlyList<Location>, Error>(locations);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -78,6 +100,10 @@ public sealed class EfCoreLocationRepository : ILocationRepository
             }
 
             return Result.Success<Location, Error>(location);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -104,6 +130,10 @@ public sealed class EfCoreLocationRepository : ILocationRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to update location {LocationId}", location.Id);
@@ -125,6 +155,10 @@ public sealed class EfCoreLocationRepository : ILocationRepository
             }
 
             return UnitResult.Success<Error>();
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -149,6 +183,10 @@ public sealed class EfCoreLocationRepository : ILocationRepository
             }
 
             return UnitResult.Success<Error>();
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {

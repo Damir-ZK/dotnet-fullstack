@@ -1,6 +1,5 @@
 using CSharpFunctionalExtensions;
 using DirectoryService.Application.Common;
-using DirectoryService.Contracts;
 using DirectoryService.Domain.Common;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
@@ -35,26 +34,50 @@ public sealed class UpdateDepartmentNameHandler : ICommandHandler<UpdateDepartme
             return errors;
         }
 
-        var updateResult = await _repository.UpdateDepartmentNameAsync(command.Id, command.Name, cancellationToken);
-        if (updateResult.IsFailure)
+        var nameExistsResult = await _repository.NameExistsAsync(command.Name, command.Id, cancellationToken);
+        if (nameExistsResult.IsFailure)
         {
-            if (updateResult.Error.Type == ErrorType.NotFound)
+            _logger.LogError("Database error while checking if department name exists {DepartmentName}: {ErrorMessage}", command.Name, nameExistsResult.Error.Message);
+            return nameExistsResult.Error.ToErrorList();
+        }
+
+        if (nameExistsResult.Value)
+        {
+            _logger.LogWarning("Department with Name {DepartmentName} already exists", command.Name);
+            return Errors.Department.AlreadyExists(command.Name).ToErrorList();
+        }
+
+        var departmentResult = await _repository.GetByIdAsync(command.Id, cancellationToken);
+        if (departmentResult.IsFailure)
+        {
+            if (departmentResult.Error.Type == ErrorType.NotFound)
             {
                 _logger.LogWarning("Department with ID {DepartmentId} was not found for renaming", command.Id);
             }
             else
             {
-                _logger.LogError("Database error while updating name for department {DepartmentId}: {ErrorMessage}", command.Id, updateResult.Error.Message);
+                _logger.LogError("Database error while retrieving department {DepartmentId}: {ErrorMessage}", command.Id, departmentResult.Error.Message);
             }
 
+            return departmentResult.Error.ToErrorList();
+        }
+
+        var department = departmentResult.Value;
+        var changeNameResult = department.ChangeName(command.Name);
+        if (changeNameResult.IsFailure)
+        {
+            _logger.LogWarning("Domain validation failed while renaming department {DepartmentId}: {@Errors}", command.Id, changeNameResult.Error);
+            return changeNameResult.Error.ToErrorList();
+        }
+
+        var updateResult = await _repository.UpdateAsync(department, cancellationToken);
+        if (updateResult.IsFailure)
+        {
+            _logger.LogError("Database error while updating name for department {DepartmentId}: {ErrorMessage}", command.Id, updateResult.Error.Message);
             return updateResult.Error.ToErrorList();
         }
 
         _logger.LogInformation("Department with ID {DepartmentId} renamed successfully to {DepartmentName}", command.Id, command.Name);
         return Result.Success<Guid, ErrorList>(command.Id);
     }
-
-    // ReSharper disable once UnusedMember.Global
-    public Task<Result<Guid, ErrorList>> Handle(UpdateDepartmentNameRequest request, CancellationToken cancellationToken = default) =>
-        Handle(new UpdateDepartmentNameCommand(request.Id, request.Name), cancellationToken);
 }

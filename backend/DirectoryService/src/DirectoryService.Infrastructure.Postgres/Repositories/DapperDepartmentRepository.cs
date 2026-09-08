@@ -19,21 +19,28 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
         _logger = logger;
     }
 
-    public async Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken)
+    public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken) =>
+        NameExistsAsync(name, null, cancellationToken);
+
+    public async Task<Result<bool, Error>> NameExistsAsync(string name, Guid? excludeId, CancellationToken cancellationToken)
     {
         const string sql = """
         SELECT EXISTS(
             SELECT 1
             FROM departments
-            WHERE lower(name) = lower(@Name)
+            WHERE lower(name) = lower(@Name) AND (@ExcludeId IS NULL OR id != @ExcludeId)
         )
         """;
 
         try
         {
             var exists = await _connection.ExecuteScalarAsync<bool>(
-                new CommandDefinition(sql, new { Name = name }, cancellationToken: cancellationToken));
+                new CommandDefinition(sql, new { Name = name, ExcludeId = excludeId }, cancellationToken: cancellationToken));
             return Result.Success<bool, Error>(exists);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -53,6 +60,18 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
         INSERT INTO department_locations (id, department_id, location_id, is_primary_location)
         VALUES (@Id, @DepartmentId, @LocationId, @IsPrimaryLocation)
         """;
+
+        if (_connection.State != ConnectionState.Open)
+        {
+            if (_connection is System.Data.Common.DbConnection dbConn)
+            {
+                await dbConn.OpenAsync(cancellationToken);
+            }
+            else
+            {
+                _connection.Open();
+            }
+        }
 
         var transaction = _connection.BeginTransaction();
 
@@ -93,6 +112,11 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
             transaction.Commit();
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            transaction.Rollback();
+            throw;
+        }
         catch (Exception ex)
         {
             transaction.Rollback();
@@ -128,6 +152,10 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to update department {DepartmentId}", department.Id);
@@ -157,6 +185,10 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to delete department {DepartmentId}", id);
@@ -177,6 +209,10 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
                 new CommandDefinition(sql, cancellationToken: cancellationToken));
 
             return Result.Success<IReadOnlyList<Department>, Error>(departments.AsList());
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -205,40 +241,14 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
 
             return Result.Success<Department, Error>(department);
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to fetch department by id {DepartmentId}", id);
             return Errors.General.Database("A database error occurred while fetching department.");
-        }
-    }
-
-    public async Task<UnitResult<Error>> UpdateDepartmentNameAsync(Guid id, string name, CancellationToken cancellationToken)
-    {
-        const string updateNameSql = """
-        UPDATE departments
-        SET name = @Name, updated_at = NOW()
-        WHERE id = @Id
-        """;
-
-        try
-        {
-            var rows = await _connection.ExecuteAsync(
-                new CommandDefinition(
-                    updateNameSql,
-                    new { Id = id, Name = name },
-                    cancellationToken: cancellationToken));
-
-            if (rows == 0)
-            {
-                return Errors.Department.NotFound(id);
-            }
-
-            return UnitResult.Success<Error>();
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Failed to update department name for {DepartmentId}", id);
-            return Errors.General.Database("A database error occurred while updating department name.");
         }
     }
 
@@ -257,6 +267,10 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
             var exists = await _connection.ExecuteScalarAsync<bool>(
                 new CommandDefinition(sql, new { DepartmentId = departmentId, LocationId = locationId }, cancellationToken: cancellationToken));
             return Result.Success<bool, Error>(exists);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -280,6 +294,10 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
                     new { Id = Guid.NewGuid(), DepartmentId = departmentId, LocationId = locationId },
                     cancellationToken: cancellationToken));
             return UnitResult.Success<Error>();
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -307,10 +325,40 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to remove location link for Department {DepartmentId} and Location {LocationId}", departmentId, locationId);
             return Errors.General.Database("A database error occurred while removing department location link.");
+        }
+    }
+
+    public async Task<Result<IReadOnlyList<Guid>, Error>> GetLocationIdsAsync(Guid departmentId, CancellationToken cancellationToken)
+    {
+        const string sql = """
+        SELECT location_id
+        FROM department_locations
+        WHERE department_id = @DepartmentId
+        """;
+
+        try
+        {
+            var locationIds = await _connection.QueryAsync<Guid>(
+                new CommandDefinition(sql, new { DepartmentId = departmentId }, cancellationToken: cancellationToken));
+
+            return Result.Success<IReadOnlyList<Guid>, Error>(locationIds.AsList());
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to fetch location ids for Department {DepartmentId}", departmentId);
+            return Errors.General.Database("A database error occurred while fetching department locations.");
         }
     }
 }

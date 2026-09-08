@@ -56,13 +56,16 @@ public static class DependencyInjection
     public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("Postgres");
-        services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
-        services.AddScoped<IDbConnection>(_ =>
+        if (string.IsNullOrWhiteSpace(connectionString))
         {
-            var connection = new NpgsqlConnection(connectionString);
-            connection.Open();
-            return connection;
-        });
+            throw new InvalidOperationException("Connection string 'Postgres' is missing.");
+        }
+
+        services.AddSingleton<NpgsqlDataSource>(_ => NpgsqlDataSource.Create(connectionString));
+        services.AddDbContext<AppDbContext>((sp, options) =>
+            options.UseNpgsql(sp.GetRequiredService<NpgsqlDataSource>()));
+        services.AddScoped<IDbConnection>(sp =>
+            sp.GetRequiredService<NpgsqlDataSource>().CreateConnection());
 
         return services;
     }

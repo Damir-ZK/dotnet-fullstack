@@ -20,6 +20,9 @@ public sealed class DependencyInjectionTests
         public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken) =>
             Task.FromResult(Result.Success<bool, Error>(false));
 
+        public Task<Result<bool, Error>> NameExistsAsync(string name, Guid? excludeId, CancellationToken cancellationToken) =>
+            Task.FromResult(Result.Success<bool, Error>(false));
+
         public Task<UnitResult<Error>> AddAsync(Location location, CancellationToken cancellationToken) =>
             Task.FromResult(UnitResult.Success<Error>());
 
@@ -44,6 +47,9 @@ public sealed class DependencyInjectionTests
         public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken) =>
             Task.FromResult(Result.Success<bool, Error>(false));
 
+        public Task<Result<bool, Error>> NameExistsAsync(string name, Guid? excludeId, CancellationToken cancellationToken) =>
+            Task.FromResult(Result.Success<bool, Error>(false));
+
         public Task<UnitResult<Error>> AddAsync(Department department, IReadOnlyCollection<Guid> locationIds, CancellationToken cancellationToken) =>
             Task.FromResult(UnitResult.Success<Error>());
 
@@ -59,9 +65,6 @@ public sealed class DependencyInjectionTests
         public Task<UnitResult<Error>> DeleteAsync(Guid id, CancellationToken cancellationToken) =>
             Task.FromResult(UnitResult.Success<Error>());
 
-        public Task<UnitResult<Error>> UpdateDepartmentNameAsync(Guid id, string name, CancellationToken cancellationToken) =>
-            Task.FromResult(UnitResult.Success<Error>());
-
         public Task<Result<bool, Error>> LocationLinkExistsAsync(Guid departmentId, Guid locationId, CancellationToken cancellationToken) =>
             Task.FromResult(Result.Success<bool, Error>(false));
 
@@ -70,6 +73,9 @@ public sealed class DependencyInjectionTests
 
         public Task<UnitResult<Error>> RemoveLocationLinkAsync(Guid departmentId, Guid locationId, CancellationToken cancellationToken) =>
             Task.FromResult(UnitResult.Success<Error>());
+
+        public Task<Result<IReadOnlyList<Guid>, Error>> GetLocationIdsAsync(Guid departmentId, CancellationToken cancellationToken) =>
+            Task.FromResult(Result.Success<IReadOnlyList<Guid>, Error>([]));
     }
 
     [Fact]
@@ -123,16 +129,10 @@ public sealed class DependencyInjectionTests
 
         // Validators
         Assert.NotNull(sp.GetService<IValidator<CreateLocationCommand>>());
-        Assert.NotNull(sp.GetService<IValidator<CreateLocationDto>>());
         Assert.NotNull(sp.GetService<IValidator<UpdateLocationCommand>>());
-        Assert.NotNull(sp.GetService<IValidator<UpdateLocationDto>>());
         Assert.NotNull(sp.GetService<IValidator<UpdateLocationNameCommand>>());
-        Assert.NotNull(sp.GetService<IValidator<UpdateLocationNameRequest>>());
         Assert.NotNull(sp.GetService<IValidator<CreateDepartmentCommand>>());
-        Assert.NotNull(sp.GetService<IValidator<CreateDepartmentDto>>());
         Assert.NotNull(sp.GetService<IValidator<UpdateDepartmentCommand>>());
-        Assert.NotNull(sp.GetService<IValidator<UpdateDepartmentDto>>());
         Assert.NotNull(sp.GetService<IValidator<UpdateDepartmentNameCommand>>());
-        Assert.NotNull(sp.GetService<IValidator<UpdateDepartmentNameRequest>>());
     }
 }

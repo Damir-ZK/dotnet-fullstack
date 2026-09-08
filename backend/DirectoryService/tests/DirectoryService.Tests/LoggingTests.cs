@@ -71,21 +71,24 @@ public sealed class LoggingTests
         public List<Location> Locations { get; } = [];
         public bool ShouldFailWithDbError { get; init; }
 
-        public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken)
+        public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken) =>
+            NameExistsAsync(name, null, cancellationToken);
+
+        public Task<Result<bool, Error>> NameExistsAsync(string name, Guid? excludeId, CancellationToken cancellationToken)
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(Result.Failure<bool, Error>(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(Result.Failure<bool, Error>(Errors.General.Database("Database failure")));
             }
 
-            return Task.FromResult(Result.Success<bool, Error>(Locations.Any(l => string.Equals(l.Name, name, StringComparison.OrdinalIgnoreCase))));
+            return Task.FromResult(Result.Success<bool, Error>(Locations.Any(l => (!excludeId.HasValue || l.Id != excludeId.Value) && string.Equals(l.Name, name, StringComparison.OrdinalIgnoreCase))));
         }
 
         public Task<UnitResult<Error>> AddAsync(Location location, CancellationToken cancellationToken)
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             Locations.Add(location);
@@ -99,7 +102,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(Result.Failure<Location, Error>(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(Result.Failure<Location, Error>(Errors.General.Database("Database failure")));
             }
 
             var loc = Locations.FirstOrDefault(l => l.Id == id);
@@ -112,7 +115,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             return Task.FromResult(UnitResult.Success<Error>());
@@ -122,7 +125,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             var removed = Locations.RemoveAll(l => l.Id == id);
@@ -135,7 +138,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             var loc = Locations.FirstOrDefault(l => l.Id == id);
@@ -154,21 +157,24 @@ public sealed class LoggingTests
         public HashSet<(Guid, Guid)> Links { get; } = [];
         public bool ShouldFailWithDbError { get; init; }
 
-        public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken)
+        public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken) =>
+            NameExistsAsync(name, null, cancellationToken);
+
+        public Task<Result<bool, Error>> NameExistsAsync(string name, Guid? excludeId, CancellationToken cancellationToken)
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(Result.Failure<bool, Error>(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(Result.Failure<bool, Error>(Errors.General.Database("Database failure")));
             }
 
-            return Task.FromResult(Result.Success<bool, Error>(Departments.Any(d => string.Equals(d.Name, name, StringComparison.OrdinalIgnoreCase))));
+            return Task.FromResult(Result.Success<bool, Error>(Departments.Any(d => (!excludeId.HasValue || d.Id != excludeId.Value) && string.Equals(d.Name, name, StringComparison.OrdinalIgnoreCase))));
         }
 
         public Task<UnitResult<Error>> AddAsync(Department department, IReadOnlyCollection<Guid> locationIds, CancellationToken cancellationToken)
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             Departments.Add(department);
@@ -187,7 +193,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(Result.Failure<Department, Error>(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(Result.Failure<Department, Error>(Errors.General.Database("Database failure")));
             }
 
             var dept = Departments.FirstOrDefault(d => d.Id == id);
@@ -200,7 +206,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             return Task.FromResult(UnitResult.Success<Error>());
@@ -210,7 +216,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             var removed = Departments.RemoveAll(d => d.Id == id);
@@ -219,27 +225,11 @@ public sealed class LoggingTests
                 : UnitResult.Failure(Errors.Department.NotFound(id)));
         }
 
-        public Task<UnitResult<Error>> UpdateDepartmentNameAsync(Guid id, string name, CancellationToken cancellationToken)
-        {
-            if (ShouldFailWithDbError)
-            {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
-            }
-
-            var dept = Departments.FirstOrDefault(d => d.Id == id);
-            if (dept is null)
-            {
-                return Task.FromResult(UnitResult.Failure(Errors.Department.NotFound(id)));
-            }
-
-            return Task.FromResult(UnitResult.Success<Error>());
-        }
-
         public Task<Result<bool, Error>> LocationLinkExistsAsync(Guid departmentId, Guid locationId, CancellationToken cancellationToken)
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(Result.Failure<bool, Error>(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(Result.Failure<bool, Error>(Errors.General.Database("Database failure")));
             }
 
             return Task.FromResult(Result.Success<bool, Error>(Links.Contains((departmentId, locationId))));
@@ -249,7 +239,7 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             Links.Add((departmentId, locationId));
@@ -260,13 +250,24 @@ public sealed class LoggingTests
         {
             if (ShouldFailWithDbError)
             {
-                return Task.FromResult(UnitResult.Failure(Error.Failure("db.error", "Database failure")));
+                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
             }
 
             var removed = Links.Remove((departmentId, locationId));
             return Task.FromResult(removed
                 ? UnitResult.Success<Error>()
                 : UnitResult.Failure(Errors.Department.LocationNotLinked(departmentId, locationId)));
+        }
+
+        public Task<Result<IReadOnlyList<Guid>, Error>> GetLocationIdsAsync(Guid departmentId, CancellationToken cancellationToken)
+        {
+            if (ShouldFailWithDbError)
+            {
+                return Task.FromResult(Result.Failure<IReadOnlyList<Guid>, Error>(Errors.General.Database("Database failure")));
+            }
+
+            IReadOnlyList<Guid> locIds = Links.Where(l => l.Item1 == departmentId).Select(l => l.Item2).ToList();
+            return Task.FromResult(Result.Success<IReadOnlyList<Guid>, Error>(locIds));
         }
     }
 
@@ -590,6 +591,9 @@ public sealed class LoggingTests
 
         var msOverride = serilogSection["MinimumLevel:Override:Microsoft"];
         Assert.Equal("Warning", msOverride);
+
+        var lifetimeOverride = serilogSection["MinimumLevel:Override:Microsoft.Hosting.Lifetime"];
+        Assert.Equal("Information", lifetimeOverride);
 
         var sinks = serilogSection.GetSection("WriteTo").GetChildren().Select(c => c["Name"]).ToList();
         Assert.Contains("Console", sinks);

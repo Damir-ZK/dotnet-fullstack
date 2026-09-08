@@ -24,7 +24,13 @@ public sealed class GetDepartmentByIdHandler : IQueryHandler<GetDepartmentByIdQu
             return departmentResult.Error.ToErrorList();
         }
 
-        return Map(departmentResult.Value, []);
+        var locationsResult = await _departmentRepository.GetLocationIdsAsync(query.Id, cancellationToken);
+        if (locationsResult.IsFailure)
+        {
+            return locationsResult.Error.ToErrorList();
+        }
+
+        return Map(departmentResult.Value, locationsResult.Value);
     }
 
     private static DepartmentDto Map(Department department, IReadOnlyCollection<Guid>? locationIds) =>

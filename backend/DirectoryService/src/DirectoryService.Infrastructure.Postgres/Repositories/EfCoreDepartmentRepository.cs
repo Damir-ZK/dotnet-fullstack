@@ -18,13 +18,27 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
         _logger = logger;
     }
 
-    public async Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken)
+    public Task<Result<bool, Error>> NameExistsAsync(string name, CancellationToken cancellationToken) =>
+        NameExistsAsync(name, null, cancellationToken);
+
+    public async Task<Result<bool, Error>> NameExistsAsync(string name, Guid? excludeId, CancellationToken cancellationToken)
     {
         try
         {
-            var exists = await _dbContext.Departments
-                .AnyAsync(d => string.Equals(d.Name, name, StringComparison.OrdinalIgnoreCase), cancellationToken);
+            var query = _dbContext.Departments
+                .Where(d => string.Equals(d.Name, name, StringComparison.OrdinalIgnoreCase));
+
+            if (excludeId.HasValue)
+            {
+                query = query.Where(d => d.Id != excludeId.Value);
+            }
+
+            var exists = await query.AnyAsync(cancellationToken);
             return Result.Success<bool, Error>(exists);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -62,6 +76,10 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
             await transaction.CommitAsync(cancellationToken);
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to save department {DepartmentId} with name {Name}", department.Id, department.Name);
@@ -87,6 +105,10 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to update department {DepartmentId}", department.Id);
@@ -109,6 +131,10 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to delete department {DepartmentId}", id);
@@ -125,6 +151,10 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
                 .ToListAsync(cancellationToken);
 
             return Result.Success<IReadOnlyList<Department>, Error>(departments);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -148,34 +178,14 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
 
             return Result.Success<Department, Error>(department);
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to fetch department by id {DepartmentId}", id);
             return Errors.General.Database("A database error occurred while fetching department.");
-        }
-    }
-
-    public async Task<UnitResult<Error>> UpdateDepartmentNameAsync(Guid id, string name, CancellationToken cancellationToken)
-    {
-        try
-        {
-            var rows = await _dbContext.Departments
-                .Where(d => d.Id == id)
-                .ExecuteUpdateAsync(s => s
-                    .SetProperty(d => d.Name, name)
-                    .SetProperty(d => d.UpdatedAt, DateTime.UtcNow), cancellationToken);
-
-            if (rows == 0)
-            {
-                return Errors.Department.NotFound(id);
-            }
-
-            return UnitResult.Success<Error>();
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Failed to update department name for {DepartmentId}", id);
-            return Errors.General.Database("A database error occurred while updating department name.");
         }
     }
 
@@ -186,6 +196,10 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
             var exists = await _dbContext.DepartmentLocations
                 .AnyAsync(link => link.DepartmentId == departmentId && link.LocationId == locationId, cancellationToken);
             return Result.Success<bool, Error>(exists);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -207,6 +221,10 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
             await _dbContext.DepartmentLocations.AddAsync(createResult.Value, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);
             return UnitResult.Success<Error>();
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
@@ -230,10 +248,36 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
 
             return UnitResult.Success<Error>();
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to remove location link for Department {DepartmentId} and Location {LocationId}", departmentId, locationId);
             return Errors.General.Database("A database error occurred while removing department location link.");
+        }
+    }
+
+    public async Task<Result<IReadOnlyList<Guid>, Error>> GetLocationIdsAsync(Guid departmentId, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var locationIds = await _dbContext.DepartmentLocations
+                .Where(link => link.DepartmentId == departmentId)
+                .Select(link => link.LocationId)
+                .ToListAsync(cancellationToken);
+
+            return Result.Success<IReadOnlyList<Guid>, Error>(locationIds);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to fetch location ids for Department {DepartmentId}", departmentId);
+            return Errors.General.Database("A database error occurred while fetching department locations.");
         }
     }
 }
