@@ -1,4 +1,3 @@
-using DirectoryService.Contracts;
 using FluentValidation;
 
 // ReSharper disable once CheckNamespace

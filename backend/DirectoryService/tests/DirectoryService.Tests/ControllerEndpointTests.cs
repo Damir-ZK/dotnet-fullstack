@@ -97,9 +97,6 @@ public sealed class ControllerEndpointTests
             return Task.FromResult(UnitResult.Success<Error>());
         }
 
-        public Task<UnitResult<Error>> UpdateDepartmentNameAsync(Guid id, string name, CancellationToken cancellationToken) =>
-            Task.FromResult(UnitResult.Success<Error>());
-
         public Task<Result<bool, Error>> LocationLinkExistsAsync(Guid departmentId, Guid locationId, CancellationToken cancellationToken) =>
             Task.FromResult(Result.Success<bool, Error>(Links.Contains((departmentId, locationId))));
 

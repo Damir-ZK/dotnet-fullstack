@@ -225,22 +225,6 @@ public sealed class LoggingTests
                 : UnitResult.Failure(Errors.Department.NotFound(id)));
         }
 
-        public Task<UnitResult<Error>> UpdateDepartmentNameAsync(Guid id, string name, CancellationToken cancellationToken)
-        {
-            if (ShouldFailWithDbError)
-            {
-                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
-            }
-
-            var dept = Departments.FirstOrDefault(d => d.Id == id);
-            if (dept is null)
-            {
-                return Task.FromResult(UnitResult.Failure(Errors.Department.NotFound(id)));
-            }
-
-            return Task.FromResult(UnitResult.Success<Error>());
-        }
-
         public Task<Result<bool, Error>> LocationLinkExistsAsync(Guid departmentId, Guid locationId, CancellationToken cancellationToken)
         {
             if (ShouldFailWithDbError)

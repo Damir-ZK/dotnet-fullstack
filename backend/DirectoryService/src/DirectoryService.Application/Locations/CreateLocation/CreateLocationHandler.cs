@@ -1,6 +1,5 @@
 using CSharpFunctionalExtensions;
 using DirectoryService.Application.Common;
-using DirectoryService.Contracts;
 using DirectoryService.Domain;
 using DirectoryService.Domain.Common;
 using FluentValidation;

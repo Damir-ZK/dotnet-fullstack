@@ -189,34 +189,6 @@ public sealed class EfCoreDepartmentRepository : IDepartmentRepository
         }
     }
 
-    public async Task<UnitResult<Error>> UpdateDepartmentNameAsync(Guid id, string name, CancellationToken cancellationToken)
-    {
-        try
-        {
-            var rows = await _dbContext.Departments
-                .Where(d => d.Id == id)
-                .ExecuteUpdateAsync(s => s
-                    .SetProperty(d => d.Name, name)
-                    .SetProperty(d => d.UpdatedAt, DateTime.UtcNow), cancellationToken);
-
-            if (rows == 0)
-            {
-                return Errors.Department.NotFound(id);
-            }
-
-            return UnitResult.Success<Error>();
-        }
-        catch (OperationCanceledException)
-        {
-            throw;
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Failed to update department name for {DepartmentId}", id);
-            return Errors.General.Database("A database error occurred while updating department name.");
-        }
-    }
-
     public async Task<Result<bool, Error>> LocationLinkExistsAsync(Guid departmentId, Guid locationId, CancellationToken cancellationToken)
     {
         try

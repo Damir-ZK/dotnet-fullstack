@@ -2,7 +2,6 @@ using DirectoryService.Application;
 using DirectoryService.Application.Common;
 using DirectoryService.Application.Departments;
 using DirectoryService.Application.Locations;
-using DirectoryService.Contracts;
 using DirectoryService.Domain.Common;
 using Xunit;
 
@@ -46,13 +45,15 @@ public sealed class ValidationTests
     public async Task CreateDepartmentCommandValidator_WhenNameExceedsMaxLength_ReturnsExpectedErrorMessage()
     {
         var validator = new CreateDepartmentCommandValidator();
-        var command = new CreateDepartmentCommand(new string('a', AppConstants.MaxNameLength + 1), "valid-slug", null, null);
+        var command =
+            new CreateDepartmentCommand(new string('a', AppConstants.MaxNameLength + 1), "valid-slug", null, null);
 
         var result = await validator.ValidateAsync(command);
 
         Assert.False(result.IsValid);
         Assert.Contains(result.Errors, e => e.PropertyName == nameof(CreateDepartmentCommand.Name)
-            && e.ErrorMessage == $"Department name cannot exceed {AppConstants.MaxNameLength} characters.");
+                                            && e.ErrorMessage ==
+                                            $"Department name cannot exceed {AppConstants.MaxNameLength} characters.");
     }
 
     [Fact]
@@ -67,8 +68,10 @@ public sealed class ValidationTests
 
         Assert.False(result.IsValid);
         Assert.Contains(result.Errors, e => e.PropertyName == nameof(CreateLocationCommand.Name)
-            && e.ErrorMessage == $"Location name cannot exceed {AppConstants.MaxNameLength} characters.");
+                                            && e.ErrorMessage ==
+                                            $"Location name cannot exceed {AppConstants.MaxNameLength} characters.");
         Assert.Contains(result.Errors, e => e.PropertyName == nameof(CreateLocationCommand.Address)
-            && e.ErrorMessage == $"Location address cannot exceed {AppConstants.MaxAddressLength} characters.");
+                                            && e.ErrorMessage ==
+                                            $"Location address cannot exceed {AppConstants.MaxAddressLength} characters.");
     }
 }

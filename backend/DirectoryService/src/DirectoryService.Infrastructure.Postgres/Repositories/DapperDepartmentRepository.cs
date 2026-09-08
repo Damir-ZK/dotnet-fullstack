@@ -252,40 +252,6 @@ public sealed class DapperDepartmentRepository : IDepartmentRepository
         }
     }
 
-    public async Task<UnitResult<Error>> UpdateDepartmentNameAsync(Guid id, string name, CancellationToken cancellationToken)
-    {
-        const string updateNameSql = """
-        UPDATE departments
-        SET name = @Name, updated_at = NOW()
-        WHERE id = @Id
-        """;
-
-        try
-        {
-            var rows = await _connection.ExecuteAsync(
-                new CommandDefinition(
-                    updateNameSql,
-                    new { Id = id, Name = name },
-                    cancellationToken: cancellationToken));
-
-            if (rows == 0)
-            {
-                return Errors.Department.NotFound(id);
-            }
-
-            return UnitResult.Success<Error>();
-        }
-        catch (OperationCanceledException)
-        {
-            throw;
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Failed to update department name for {DepartmentId}", id);
-            return Errors.General.Database("A database error occurred while updating department name.");
-        }
-    }
-
     public async Task<Result<bool, Error>> LocationLinkExistsAsync(Guid departmentId, Guid locationId, CancellationToken cancellationToken)
     {
         const string sql = """

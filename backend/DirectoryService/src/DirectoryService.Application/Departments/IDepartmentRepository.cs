@@ -13,7 +13,6 @@ public interface IDepartmentRepository
     Task<Result<Department, Error>> GetByIdAsync(Guid id, CancellationToken cancellationToken);
     Task<UnitResult<Error>> UpdateAsync(Department department, CancellationToken cancellationToken);
     Task<UnitResult<Error>> DeleteAsync(Guid id, CancellationToken cancellationToken);
-    Task<UnitResult<Error>> UpdateDepartmentNameAsync(Guid id, string name, CancellationToken cancellationToken);
     Task<Result<bool, Error>> LocationLinkExistsAsync(Guid departmentId, Guid locationId, CancellationToken cancellationToken);
     Task<UnitResult<Error>> AddLocationLinkAsync(Guid departmentId, Guid locationId, CancellationToken cancellationToken);
     Task<UnitResult<Error>> RemoveLocationLinkAsync(Guid departmentId, Guid locationId, CancellationToken cancellationToken);
