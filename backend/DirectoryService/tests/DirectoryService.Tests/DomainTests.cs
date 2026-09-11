@@ -55,6 +55,28 @@ public sealed class DomainTests
     }
 
     [Fact]
+    public void Location_ChangeName_WithValidData_ReturnsSuccess()
+    {
+        var location = Location.Create(Guid.NewGuid(), "Original Name", "Original Address").Value;
+
+        var result = location.ChangeName("New Name");
+
+        Assert.True(result.IsSuccess);
+        Assert.Equal("New Name", location.Name);
+    }
+
+    [Fact]
+    public void Location_ChangeName_WithEmptyName_DoesNotMutateState()
+    {
+        var location = Location.Create(Guid.NewGuid(), "Original Name", "Original Address").Value;
+
+        var result = location.ChangeName("   ");
+
+        Assert.True(result.IsFailure);
+        Assert.Equal("Original Name", location.Name);
+    }
+
+    [Fact]
     public void Department_Create_WithValidData_ReturnsSuccess()
     {
         var id = Guid.NewGuid();

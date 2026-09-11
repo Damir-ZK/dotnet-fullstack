@@ -37,9 +37,6 @@ public sealed class DependencyInjectionTests
 
         public Task<UnitResult<Error>> DeleteAsync(Guid id, CancellationToken cancellationToken) =>
             Task.FromResult(UnitResult.Success<Error>());
-
-        public Task<UnitResult<Error>> UpdateLocationNameAsync(Guid id, string name, CancellationToken cancellationToken) =>
-            Task.FromResult(UnitResult.Success<Error>());
     }
 
     private sealed class DummyDepartmentRepository : IDepartmentRepository

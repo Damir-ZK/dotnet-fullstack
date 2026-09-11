@@ -1,6 +1,5 @@
 using CSharpFunctionalExtensions;
 using DirectoryService.Application.Common;
-using DirectoryService.Contracts;
 using DirectoryService.Domain.Common;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
@@ -48,26 +47,37 @@ public sealed class UpdateLocationNameHandler : ICommandHandler<UpdateLocationNa
             return Errors.Location.AlreadyExists(command.Name).ToErrorList();
         }
 
-        var updateResult = await _repository.UpdateLocationNameAsync(command.Id, command.Name, cancellationToken);
-        if (updateResult.IsFailure)
+        var locationResult = await _repository.GetByIdAsync(command.Id, cancellationToken);
+        if (locationResult.IsFailure)
         {
-            if (updateResult.Error.Type == ErrorType.NotFound)
+            if (locationResult.Error.Type == ErrorType.NotFound)
             {
                 _logger.LogWarning("Location with ID {LocationId} was not found for renaming", command.Id);
             }
             else
             {
-                _logger.LogError("Database error while updating name for location {LocationId}: {ErrorMessage}", command.Id, updateResult.Error.Message);
+                _logger.LogError("Database error while retrieving location {LocationId}: {ErrorMessage}", command.Id, locationResult.Error.Message);
             }
 
+            return locationResult.Error.ToErrorList();
+        }
+
+        var location = locationResult.Value;
+        var changeNameResult = location.ChangeName(command.Name);
+        if (changeNameResult.IsFailure)
+        {
+            _logger.LogWarning("Domain validation failed while renaming location {LocationId}: {@Errors}", command.Id, changeNameResult.Error);
+            return changeNameResult.Error.ToErrorList();
+        }
+
+        var updateResult = await _repository.UpdateAsync(location, cancellationToken);
+        if (updateResult.IsFailure)
+        {
+            _logger.LogError("Database error while updating name for location {LocationId}: {ErrorMessage}", command.Id, updateResult.Error.Message);
             return updateResult.Error.ToErrorList();
         }
 
         _logger.LogInformation("Location with ID {LocationId} renamed successfully to {LocationName}", command.Id, command.Name);
         return Result.Success<Guid, ErrorList>(command.Id);
     }
-
-    // ReSharper disable once UnusedMember.Global
-    public Task<Result<Guid, ErrorList>> Handle(UpdateLocationNameRequest request, CancellationToken cancellationToken = default) =>
-        Handle(new UpdateLocationNameCommand(request.Id, request.Name), cancellationToken);
 }

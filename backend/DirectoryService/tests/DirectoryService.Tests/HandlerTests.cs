@@ -59,9 +59,6 @@ public sealed class HandlerTests
             Locations.RemoveAll(l => l.Id == id);
             return Task.FromResult(UnitResult.Success<Error>());
         }
-
-        public Task<UnitResult<Error>> UpdateLocationNameAsync(Guid id, string name, CancellationToken cancellationToken) =>
-            Task.FromResult(UnitResult.Success<Error>());
     }
 
     private sealed class FakeDepartmentRepository : IDepartmentRepository
@@ -291,12 +288,46 @@ public sealed class HandlerTests
     {
         var repo = new FakeLocationRepository();
         var locId = Guid.NewGuid();
+        var loc = Location.Create(locId, "Old Name", "Address").Value;
+        repo.Locations.Add(loc);
 
         var handler = new UpdateLocationNameHandler(repo, new UpdateLocationNameCommandValidator());
         var result = await handler.Handle(new UpdateLocationNameCommand(locId, "New Name"), CancellationToken.None);
 
         Assert.True(result.IsSuccess);
         Assert.Equal(locId, result.Value);
+        Assert.Equal("New Name", repo.Locations[0].Name);
+    }
+
+    [Fact]
+    public async Task UpdateLocationNameHandler_WhenLocationNotFound_ReturnsNotFoundError()
+    {
+        var repo = new FakeLocationRepository();
+        var locId = Guid.NewGuid();
+
+        var handler = new UpdateLocationNameHandler(repo, new UpdateLocationNameCommandValidator());
+        var result = await handler.Handle(new UpdateLocationNameCommand(locId, "New Name"), CancellationToken.None);
+
+        Assert.True(result.IsFailure);
+        Assert.Equal(ErrorType.NotFound, result.Error[0].Type);
+        Assert.Equal("location.not.found", result.Error[0].Code);
+    }
+
+    [Fact]
+    public async Task UpdateLocationNameHandler_WithDuplicateName_ReturnsConflictError()
+    {
+        var repo = new FakeLocationRepository();
+        var loc1 = Location.Create(Guid.NewGuid(), "HQ", "123 Main St").Value;
+        var loc2 = Location.Create(Guid.NewGuid(), "Branch", "456 Side St").Value;
+        repo.Locations.Add(loc1);
+        repo.Locations.Add(loc2);
+
+        var handler = new UpdateLocationNameHandler(repo, new UpdateLocationNameCommandValidator());
+        var result = await handler.Handle(new UpdateLocationNameCommand(loc2.Id, "HQ"), CancellationToken.None);
+
+        Assert.True(result.IsFailure);
+        Assert.Equal(ErrorType.Conflict, result.Error[0].Type);
+        Assert.Equal("location.already.exists", result.Error[0].Code);
     }
 
     [Fact]

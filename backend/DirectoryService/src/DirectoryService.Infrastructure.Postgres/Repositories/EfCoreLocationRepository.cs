@@ -166,32 +166,4 @@ public sealed class EfCoreLocationRepository : ILocationRepository
             return Errors.General.Database("A database error occurred while deleting location.");
         }
     }
-
-    public async Task<UnitResult<Error>> UpdateLocationNameAsync(Guid id, string name, CancellationToken cancellationToken)
-    {
-        try
-        {
-            var rows = await _dbContext.Locations
-                .Where(l => l.Id == id)
-                .ExecuteUpdateAsync(s => s
-                    .SetProperty(l => l.Name, name)
-                    .SetProperty(l => l.UpdatedAt, DateTime.UtcNow), cancellationToken);
-
-            if (rows == 0)
-            {
-                return Errors.Location.NotFound(id);
-            }
-
-            return UnitResult.Success<Error>();
-        }
-        catch (OperationCanceledException)
-        {
-            throw;
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Failed to update location name for {LocationId}", id);
-            return Errors.General.Database("A database error occurred while updating location name.");
-        }
-    }
 }

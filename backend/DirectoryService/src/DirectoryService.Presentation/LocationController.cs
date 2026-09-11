@@ -118,15 +118,13 @@ public sealed class LocationsController : ControllerBase
         [FromBody] UpdateLocationNameRequest request,
         CancellationToken cancellationToken)
     {
-        if (request.Id != id)
+        var command = new UpdateLocationNameCommand(id, request.Name);
+        var result = await _updateLocationNameHandler.Handle(command, cancellationToken);
+        if (result.IsFailure)
         {
-            _logger.LogWarning("Route ID {RouteLocationId} does not match request ID {RequestLocationId} when updating location name", id, request.Id);
-            ErrorList error = Errors.General.ValueIsInvalid(nameof(request.Id), "The route id and request id do not match.");
-            return error.ToEnvelopeResult();
+            _logger.LogWarning("Failed to update location name for {LocationId}: {@Errors}", id, result.Error);
         }
 
-        var command = new UpdateLocationNameCommand(request.Id, request.Name);
-        var result = await _updateLocationNameHandler.Handle(command, cancellationToken);
         return result.ToEnvelopeResult();
     }
 }

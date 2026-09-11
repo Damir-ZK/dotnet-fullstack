@@ -50,7 +50,6 @@ public class Location
     public string Name { get; private set; } 
     public string Address { get; private set; }
 
-    // ReSharper disable once UnusedMember.Global
     public UnitResult<Error> ChangeName(string name)
     {
         if (string.IsNullOrWhiteSpace(name))

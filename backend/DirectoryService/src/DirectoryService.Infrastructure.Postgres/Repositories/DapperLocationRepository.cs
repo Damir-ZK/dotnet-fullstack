@@ -201,39 +201,4 @@ public class DapperLocationRepository : ILocationRepository
             return Errors.General.Database("A database error occurred while deleting location.");
         }
     }
-
-    public async Task<UnitResult<Error>> UpdateLocationNameAsync(Guid id, string name,
-        CancellationToken cancellationToken)
-    {
-        const string updateNameSql = """
-                                     UPDATE locations
-                                     SET name = @Name, updated_at = NOW()
-                                     WHERE id = @Id
-                                     """;
-
-        try
-        {
-            var rows = await _connection.ExecuteAsync(
-                new CommandDefinition(
-                    updateNameSql,
-                    new { Id = id, Name = name },
-                    cancellationToken: cancellationToken));
-
-            if (rows == 0)
-            {
-                return Errors.Location.NotFound(id);
-            }
-
-            return UnitResult.Success<Error>();
-        }
-        catch (OperationCanceledException)
-        {
-            throw;
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Failed to update location name for {LocationId}", id);
-            return Errors.General.Database("A database error occurred while updating location name.");
-        }
-    }
 }
