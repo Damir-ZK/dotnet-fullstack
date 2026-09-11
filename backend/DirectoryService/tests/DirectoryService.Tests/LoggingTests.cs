@@ -133,22 +133,6 @@ public sealed class LoggingTests
                 ? UnitResult.Success<Error>()
                 : UnitResult.Failure(Errors.Location.NotFound(id)));
         }
-
-        public Task<UnitResult<Error>> UpdateLocationNameAsync(Guid id, string name, CancellationToken cancellationToken)
-        {
-            if (ShouldFailWithDbError)
-            {
-                return Task.FromResult(UnitResult.Failure(Errors.General.Database("Database failure")));
-            }
-
-            var loc = Locations.FirstOrDefault(l => l.Id == id);
-            if (loc is null)
-            {
-                return Task.FromResult(UnitResult.Failure(Errors.Location.NotFound(id)));
-            }
-
-            return Task.FromResult(UnitResult.Success<Error>());
-        }
     }
 
     private sealed class FakeDepartmentRepository : IDepartmentRepository

@@ -13,5 +13,4 @@ public interface ILocationRepository
     Task<Result<Location, Error>> GetByIdAsync(Guid id, CancellationToken cancellationToken);
     Task<UnitResult<Error>> UpdateAsync(Location location, CancellationToken cancellationToken);
     Task<UnitResult<Error>> DeleteAsync(Guid id, CancellationToken cancellationToken);
-    Task<UnitResult<Error>> UpdateLocationNameAsync(Guid id, string name, CancellationToken cancellationToken);
 }

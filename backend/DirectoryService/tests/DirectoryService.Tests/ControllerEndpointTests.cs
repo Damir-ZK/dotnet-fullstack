@@ -43,17 +43,21 @@ public sealed class ControllerEndpointTests
                 : Result.Failure<Location, Error>(Errors.Location.NotFound(id)));
         }
 
-        public Task<UnitResult<Error>> UpdateAsync(Location location, CancellationToken cancellationToken) =>
-            Task.FromResult(UnitResult.Success<Error>());
+        public Task<UnitResult<Error>> UpdateAsync(Location location, CancellationToken cancellationToken)
+        {
+            var index = Locations.FindIndex(l => l.Id == location.Id);
+            if (index >= 0)
+            {
+                Locations[index] = location;
+            }
+            return Task.FromResult(UnitResult.Success<Error>());
+        }
 
         public Task<UnitResult<Error>> DeleteAsync(Guid id, CancellationToken cancellationToken)
         {
             Locations.RemoveAll(l => l.Id == id);
             return Task.FromResult(UnitResult.Success<Error>());
         }
-
-        public Task<UnitResult<Error>> UpdateLocationNameAsync(Guid id, string name, CancellationToken cancellationToken) =>
-            Task.FromResult(UnitResult.Success<Error>());
     }
 
     private sealed class FakeDepartmentRepository : IDepartmentRepository
@@ -88,8 +92,15 @@ public sealed class ControllerEndpointTests
                 : Result.Failure<Department, Error>(Errors.Department.NotFound(id)));
         }
 
-        public Task<UnitResult<Error>> UpdateAsync(Department department, CancellationToken cancellationToken) =>
-            Task.FromResult(UnitResult.Success<Error>());
+        public Task<UnitResult<Error>> UpdateAsync(Department department, CancellationToken cancellationToken)
+        {
+            var index = Departments.FindIndex(d => d.Id == department.Id);
+            if (index >= 0)
+            {
+                Departments[index] = department;
+            }
+            return Task.FromResult(UnitResult.Success<Error>());
+        }
 
         public Task<UnitResult<Error>> DeleteAsync(Guid id, CancellationToken cancellationToken)
         {
@@ -272,5 +283,40 @@ public sealed class ControllerEndpointTests
         Assert.Equal("internal.server.error", firstError.GetProperty("code").GetString());
         Assert.Equal("An unexpected error occurred.", firstError.GetProperty("message").GetString());
         Assert.DoesNotContain("Secret", json, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task PatchLocationName_WithValidName_Returns200AndEnvelopeWithId()
+    {
+        var locRepo = new FakeLocationRepository();
+        var loc = Location.Create(Guid.NewGuid(), "Old Location", "123 Main St").Value;
+        locRepo.Locations.Add(loc);
+
+        var controller = CreateLocationsController(locRepo);
+        var result = await controller.UpdateLocationName(loc.Id, new UpdateLocationNameRequest("New Location"), CancellationToken.None);
+
+        var envelopeResult = Assert.IsType<EnvelopeResult<Guid>>(result);
+        Assert.Equal(StatusCodes.Status200OK, envelopeResult.StatusCode);
+        Assert.Equal(loc.Id, envelopeResult.Envelope.Result);
+        Assert.Null(envelopeResult.Envelope.Errors);
+        Assert.Equal("New Location", locRepo.Locations[0].Name);
+    }
+
+    [Fact]
+    public async Task PatchDepartmentName_WithValidName_Returns200AndEnvelopeWithId()
+    {
+        var deptRepo = new FakeDepartmentRepository();
+        var locRepo = new FakeLocationRepository();
+        var dept = Department.Create(Guid.NewGuid(), "Old Dept", "old-dept", null).Value;
+        deptRepo.Departments.Add(dept);
+
+        var controller = CreateDepartmentsController(deptRepo, locRepo);
+        var result = await controller.UpdateDepartmentName(dept.Id, new UpdateDepartmentNameRequest("New Dept"), CancellationToken.None);
+
+        var envelopeResult = Assert.IsType<EnvelopeResult<Guid>>(result);
+        Assert.Equal(StatusCodes.Status200OK, envelopeResult.StatusCode);
+        Assert.Equal(dept.Id, envelopeResult.Envelope.Result);
+        Assert.Null(envelopeResult.Envelope.Errors);
+        Assert.Equal("New Dept", deptRepo.Departments[0].Name);
     }
 }
